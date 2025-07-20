@@ -77,6 +77,80 @@
             border-left: 4px solid var(--sage-green);
         }
 
+        .kofi-section {
+            background: linear-gradient(135deg, var(--sage-green), var(--accent-green));
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            color: white;
+            box-shadow: 0 6px 20px rgba(156, 175, 136, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kofi-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-100%) translateY(-100%) rotate(0deg); }
+            50% { transform: translateX(0%) translateY(0%) rotate(180deg); }
+        }
+
+        .kofi-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .kofi-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+        }
+
+        .kofi-section h3 {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .kofi-section p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+            font-style: italic;
+        }
+
+        .kofi-button {
+            background: white;
+            color: var(--accent-green);
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 2px solid transparent;
+        }
+
+        .kofi-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            background: var(--cream);
+            border-color: white;
+        }
+
         .fic-grid {
             display: grid;
             gap: 1.5rem;
@@ -166,6 +240,19 @@
             display: inline-block;
         }
 
+        .backlog-large {
+            background: var(--light-sage);
+            color: var(--dark-text);
+            padding: 1.5rem 2rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-style: italic;
+            text-align: center;
+            margin-top: 1rem;
+            border: 2px solid var(--sage-green);
+            font-weight: 500;
+        }
+
         @media (max-width: 600px) {
             .container {
                 padding: 1rem 0.5rem;
@@ -178,109 +265,21 @@
             .fic-card {
                 padding: 1rem;
             }
+            
+            .kofi-section {
+                padding: 1.5rem;
+                margin: 1.5rem 0;
+            }
+            
+            .kofi-section h3 {
+                font-size: 1.4rem;
+            }
+            
+            .kofi-button {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
         }
-        .kofi-section {
-    background: linear-gradient(135deg, var(--sage-green), var(--accent-green));
-    border-radius: 15px;
-    padding: 2rem;
-    margin: 2rem 0;
-    text-align: center;
-    color: white;
-    box-shadow: 0 6px 20px rgba(156, 175, 136, 0.3);
-    position: relative;
-    overflow: hidden;
-}
-
-.kofi-section::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-    animation: shimmer 3s ease-in-out infinite;
-}
-
-@keyframes shimmer {
-    0%, 100% { transform: translateX(-100%) translateY(-100%) rotate(0deg); }
-    50% { transform: translateX(0%) translateY(0%) rotate(180deg); }
-}
-
-.kofi-content {
-    position: relative;
-    z-index: 2;
-}
-
-.kofi-icon {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
-}
-
-.kofi-section h3 {
-    font-family: 'Crimson Text', serif;
-    font-size: 1.6rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-}
-
-.kofi-section p {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-    opacity: 0.95;
-    font-style: italic;
-}
-
-.kofi-button {
-    background: white;
-    color: var(--accent-green);
-    padding: 0.8rem 2rem;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: 600;
-    display: inline-block;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    border: 2px solid transparent;
-}
-
-.kofi-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-    background: var(--cream);
-    border-color: white;
-}
-
-@media (max-width: 600px) {
-    .kofi-section {
-        padding: 1.5rem;
-        margin: 1.5rem 0;
-    }
-    
-    .kofi-section h3 {
-        font-size: 1.4rem;
-    }
-    
-    .kofi-button {
-        padding: 0.7rem 1.5rem;
-        font-size: 0.9rem;
-    }
-}
-.backlog-large {
-    background: var(--light-sage);
-    color: var(--dark-text);
-    padding: 1.5rem 2rem;
-    border-radius: 25px;
-    font-size: 1.1rem;
-    font-style: italic;
-    text-align: center;
-    margin-top: 1rem;
-    border: 2px solid var(--sage-green);
-    font-weight: 500;
-}
-
     </style>
 </head>
 <body>
@@ -293,21 +292,22 @@
         <div class="encouragement">
             likes, reblogs and beautiful lovely comments make these percentages go up! ♡´･ᴗ･`♡
         </div>
-<div class="kofi-section">
-    <div class="kofi-content">
-        <div class="kofi-icon">☕</div>
-        <h3>early access & sneak peeks</h3>
-        <p>get chapters before anyone else + juicy behind-the-scenes content on my ko-fi!</p>
-        <a href="https://ko-fi.com/jungkoode" target="_blank" class="kofi-button">
-            support me on ko-fi ♡
-        </a>
-    </div>
-</div>
+
+        <div class="kofi-section">
+            <div class="kofi-content">
+                <div class="kofi-icon">☕</div>
+                <h3>early access & sneak peeks</h3>
+                <p>get chapters before anyone else + juicy behind-the-scenes content on my ko-fi!</p>
+                <a href="https://ko-fi.com/jungkoode" target="_blank" class="kofi-button">
+                    support me on ko-fi ♡
+                </a>
+            </div>
+        </div>
 
         <div class="fic-grid">
             <!-- F.M.U. -->
             <div class="fic-card">
-                <h2 class="fic-title">fuck me up</h2>
+                <h2 class="fic-title">fuck me up ♪</h2>
                 <p class="fic-meta">fuck buddies • slow burn • roommates to lovers • psych. depth</p>
                 <span class="next-chapter">next chapter</span>
                 <div class="progress-section">
@@ -343,7 +343,7 @@
 
             <!-- KKANGPAE -->
             <div class="fic-card">
-                <h2 class="fic-title">kkangpae </h2>
+                <h2 class="fic-title">kkangpae ♪</h2>
                 <p class="fic-meta">gang au • violence • enemies to lovers • slow burn • fuck buddies</p>
                 <span class="next-chapter">next chapter</span>
                 <div class="progress-section">
@@ -377,29 +377,59 @@
                 </div>
             </div>
 
-<!-- UNMANAGEABLE -->
-<div class="fic-card">
-    <h2 class="fic-title">unmanageable</h2>
-    <p class="fic-meta">entertainment industry • pure hatred to love • manager x actor</p>
-    <div class="backlog-large">backlogging chapters</div>
-</div>
+            <!-- UNMANAGEABLE -->
+            <div class="fic-card">
+                <h2 class="fic-title">unmanageable ✎</h2>
+                <p class="fic-meta">entertainment industry • pure hatred to love • manager x actor</p>
+                <div class="backlog-large">backlogging chapters</div>
+            </div>
+
+            <!-- MARGINS -->
+            <div class="fic-card">
+                <h2 class="fic-title">margins ✎</h2>
+                <p class="fic-meta">publishing industry • cat vs. dog • workplace romance • romcom</p>
+                <div class="backlog-large">backlogging chapters</div>
+            </div>
+
+            <!-- STRINGS ATTACHED -->
+            <div class="fic-card">
+                <h2 class="fic-title">strings attached (to my heart) ✓ ♪</h2>
+                <p class="fic-meta">spiderman au • college • virgin!jungkook • spiderkook</p>
+                <span class="next-chapter">next chapter</span>
+                <div class="progress-section">
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>writing</span>
+                            <span class="writing-percent">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill writing" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>editing</span>
+                            <span class="editing-percent">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill editing" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>working on aesthetics</span>
+                            <span class="aesthetics-percent">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill aesthetics" style="width: 0%"></div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-<!-- MARGINS -->
-<div class="fic-card">
-    <h2 class="fic-title">margins</h2>
-    <p class="fic-meta">publishing industry • cat vs. dog • workplace romance • romcom</p>
-    <div class="backlog-large">backlogging chapters</div>
-</div>
-                </div>
-            </div>
-
-
             <!-- THE 25TH HOUR -->
             <div class="fic-card">
-                <h2 class="fic-title">the 25th hour</h2>
+                <h2 class="fic-title">the 25th hour ♪</h2>
                 <p class="fic-meta">dystopian • time-bending • psychological • starcrossed+fated lovers</p>
                 <span class="next-chapter">next chapter</span>
                 <div class="progress-section">
@@ -435,7 +465,7 @@
 
             <!-- WE GREW UP SOMEWHERE ALONG THE WAY -->
             <div class="fic-card">
-                <h2 class="fic-title">we grew up somewhere along the way</h2>
+                <h2 class="fic-title">we grew up somewhere along the way ♪</h2>
                 <p class="fic-meta">osaka 2003 • childhood friends to lovers • grumpy x sunshine</p>
                 <span class="next-chapter">next chapter</span>
                 <div class="progress-section">
@@ -470,9 +500,10 @@
             </div>
 
 
+
             <!-- CODE: EPITAPH -->
             <div class="fic-card">
-                <h2 class="fic-title">code : epitaph</h2>
+                <h2 class="fic-title">code : epitaph ♪</h2>
                 <p class="fic-meta">dystopian • blood bonds • 60 days survival • e2l—pure hatred</p>
                 <span class="next-chapter">next chapter</span>
                 <div class="progress-section">
@@ -508,7 +539,7 @@
 
             <!-- 5 SECONDS TO FREEDOM -->
             <div class="fic-card">
-                <h2 class="fic-title">5 seconds to freedom</h2>
+                <h2 class="fic-title">5 seconds to freedom ♪</h2>
                 <p class="fic-meta">street racing • tokyo • heiress x racer • rivals to lovers • latino!jimin</p>
                 <span class="next-chapter">next chapter</span>
                 <div class="progress-section">
@@ -544,7 +575,7 @@
 
             <!-- OUT OF LINE -->
             <div class="fic-card">
-                <h2 class="fic-title">out of line</h2>
+                <h2 class="fic-title">out of line ♪</h2>
                 <p class="fic-meta">football • real madrid • arrogant!tae • slowburn</p>
                 <span class="next-chapter">next chapter</span>
                 <div class="progress-section">
@@ -580,7 +611,7 @@
 
             <!-- ALTARS IN SHALLOW WATERS -->
             <div class="fic-card">
-                <h2 class="fic-title">altars in shallow waters</h2>
+                <h2 class="fic-title">altars in shallow waters ♪</h2>
                 <p class="fic-meta">stalker!tae • ballerina!reader • paris • psychological • dark romance</p>
                 <span class="next-chapter">next chapter</span>
                 <div class="progress-section">
@@ -614,15 +645,11 @@
                 </div>
             </div>
 
-
-<!-- IN THE PRESENCE OF YOU -->
-<div class="fic-card">
-    <h2 class="fic-title">in the presence of you</h2>
-    <p class="fic-meta">royalty • 1700s/1800s • arranged marriage • slow burn</p>
-    <div class="backlog-large">backlogging chapters</div>
-</div>
-                    </div>
-                </div>
+            <!-- IN THE PRESENCE OF YOU -->
+            <div class="fic-card">
+                <h2 class="fic-title">in the presence of you ✎</h2>
+                <p class="fic-meta">royalty • 1700s/1800s • arranged marriage • slow burn</p>
+                <div class="backlog-large">backlogging chapters</div>
             </div>
         </div>
     </div>
