@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,271 +17,274 @@
             --progress-bg: #E8EDE1;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+```
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--soft-white) 0%, var(--cream) 100%);
-            color: var(--dark-text);
-            min-height: 100vh;
-            line-height: 1.6;
-        }
+    body {
+        font-family: 'Inter', sans-serif;
+        background: linear-gradient(135deg, var(--soft-white) 0%, var(--cream) 100%);
+        color: var(--dark-text);
+        min-height: 100vh;
+        line-height: 1.6;
+    }
 
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+    }
+
+    .header {
+        text-align: center;
+        margin-bottom: 3rem;
+        position: relative;
+    }
+
+    .header::before {
+        content: '✦ ✦ ✦';
+        display: block;
+        font-size: 1.5rem;
+        color: var(--sage-green);
+        margin-bottom: 1rem;
+        letter-spacing: 2rem;
+    }
+
+    h1 {
+        font-family: 'Crimson Text', serif;
+        font-size: 2.5rem;
+        font-weight: 600;
+        color: var(--accent-green);
+        margin-bottom: 0.5rem;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .subtitle {
+        font-style: italic;
+        color: var(--accent-green);
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+    }
+
+    .encouragement {
+        background: var(--light-sage);
+        padding: 1rem 1.5rem;
+        border-radius: 15px;
+        margin: 2rem 0;
+        text-align: center;
+        font-style: italic;
+        border-left: 4px solid var(--sage-green);
+    }
+
+    .kofi-section {
+        background: linear-gradient(135deg, var(--sage-green), var(--accent-green));
+        border-radius: 15px;
+        padding: 2rem;
+        margin: 2rem 0;
+        text-align: center;
+        color: white;
+        box-shadow: 0 6px 20px rgba(156, 175, 136, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .kofi-section::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        animation: shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+        0%, 100% { transform: translateX(-100%) translateY(-100%) rotate(0deg); }
+        50% { transform: translateX(0%) translateY(0%) rotate(180deg); }
+    }
+
+    .kofi-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .kofi-icon {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+    }
+
+    .kofi-section h3 {
+        font-family: 'Crimson Text', serif;
+        font-size: 1.6rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+
+    .kofi-section p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+        opacity: 0.95;
+        font-style: italic;
+    }
+
+    .kofi-button {
+        background: white;
+        color: var(--accent-green);
+        padding: 0.8rem 2rem;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-block;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        border: 2px solid transparent;
+    }
+
+    .kofi-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        background: var(--cream);
+        border-color: white;
+    }
+
+    .fic-grid {
+        display: grid;
+        gap: 1.5rem;
+    }
+
+    .fic-card {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 15px rgba(156, 175, 136, 0.15);
+        border: 1px solid var(--light-sage);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .fic-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(156, 175, 136, 0.25);
+    }
+
+    .fic-title {
+        font-family: 'Crimson Text', serif;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--dark-text);
+        margin-bottom: 0.5rem;
+    }
+
+    .fic-meta {
+        font-size: 0.9rem;
+        color: var(--accent-green);
+        margin-bottom: 1rem;
+        font-style: italic;
+    }
+
+    .next-chapter {
+        background: var(--sage-green);
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        display: inline-block;
+        margin-bottom: 1rem;
+    }
+
+    .progress-section {
+        margin-top: 1rem;
+    }
+
+    .progress-item {
+        margin-bottom: 0.8rem;
+    }
+
+    .progress-label {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.3rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 8px;
+        background: var(--progress-bg);
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .progress-fill {
+        height: 100%;
+        border-radius: 4px;
+        transition: width 0.8s ease-in-out;
+    }
+
+    .writing { background: linear-gradient(90deg, #9CAF88, #B8C5A6); }
+    .editing { background: linear-gradient(90deg, #7A8B6B, #9CAF88); }
+    .aesthetics { background: linear-gradient(90deg, #6B7D5C, #7A8B6B); }
+
+    .backlog {
+        background: var(--light-sage);
+        color: var(--dark-text);
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-style: italic;
+        display: inline-block;
+    }
+
+    .backlog-large {
+        background: var(--light-sage);
+        color: var(--dark-text);
+        padding: 1.5rem 2rem;
+        border-radius: 25px;
+        font-size: 1.1rem;
+        font-style: italic;
+        text-align: center;
+        margin-top: 1rem;
+        border: 2px solid var(--sage-green);
+        font-weight: 500;
+    }
+
+    @media (max-width: 600px) {
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
+            padding: 1rem 0.5rem;
         }
-
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-
-        .header::before {
-            content: '✦ ✦ ✦';
-            display: block;
-            font-size: 1.5rem;
-            color: var(--sage-green);
-            margin-bottom: 1rem;
-            letter-spacing: 2rem;
-        }
-
+        
         h1 {
-            font-family: 'Crimson Text', serif;
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: var(--accent-green);
-            margin-bottom: 0.5rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        }
-
-        .subtitle {
-            font-style: italic;
-            color: var(--accent-green);
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-        }
-
-        .encouragement {
-            background: var(--light-sage);
-            padding: 1rem 1.5rem;
-            border-radius: 15px;
-            margin: 2rem 0;
-            text-align: center;
-            font-style: italic;
-            border-left: 4px solid var(--sage-green);
-        }
-
-        .kofi-section {
-            background: linear-gradient(135deg, var(--sage-green), var(--accent-green));
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 2rem 0;
-            text-align: center;
-            color: white;
-            box-shadow: 0 6px 20px rgba(156, 175, 136, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .kofi-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: shimmer 3s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0%, 100% { transform: translateX(-100%) translateY(-100%) rotate(0deg); }
-            50% { transform: translateX(0%) translateY(0%) rotate(180deg); }
-        }
-
-        .kofi-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .kofi-icon {
             font-size: 2rem;
-            margin-bottom: 0.5rem;
-            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
         }
-
-        .kofi-section h3 {
-            font-family: 'Crimson Text', serif;
-            font-size: 1.6rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-
-        .kofi-section p {
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
-            opacity: 0.95;
-            font-style: italic;
-        }
-
-        .kofi-button {
-            background: white;
-            color: var(--accent-green);
-            padding: 0.8rem 2rem;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-block;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            border: 2px solid transparent;
-        }
-
-        .kofi-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            background: var(--cream);
-            border-color: white;
-        }
-
-        .fic-grid {
-            display: grid;
-            gap: 1.5rem;
-        }
-
+        
         .fic-card {
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 12px;
+            padding: 1rem;
+        }
+        
+        .kofi-section {
             padding: 1.5rem;
-            box-shadow: 0 4px 15px rgba(156, 175, 136, 0.15);
-            border: 1px solid var(--light-sage);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 1.5rem 0;
         }
-
-        .fic-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(156, 175, 136, 0.25);
-        }
-
-        .fic-title {
-            font-family: 'Crimson Text', serif;
+        
+        .kofi-section h3 {
             font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--dark-text);
-            margin-bottom: 0.5rem;
         }
-
-        .fic-meta {
+        
+        .kofi-button {
+            padding: 0.7rem 1.5rem;
             font-size: 0.9rem;
-            color: var(--accent-green);
-            margin-bottom: 1rem;
-            font-style: italic;
         }
+    }
+</style>
+```
 
-        .next-chapter {
-            background: var(--sage-green);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            display: inline-block;
-            margin-bottom: 1rem;
-        }
-
-        .progress-section {
-            margin-top: 1rem;
-        }
-
-        .progress-item {
-            margin-bottom: 0.8rem;
-        }
-
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.3rem;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: var(--progress-bg);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            border-radius: 4px;
-            transition: width 0.8s ease-in-out;
-        }
-
-        .writing { background: linear-gradient(90deg, #9CAF88, #B8C5A6); }
-        .editing { background: linear-gradient(90deg, #7A8B6B, #9CAF88); }
-        .aesthetics { background: linear-gradient(90deg, #6B7D5C, #7A8B6B); }
-
-        .backlog {
-            background: var(--light-sage);
-            color: var(--dark-text);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-style: italic;
-            display: inline-block;
-        }
-
-        .backlog-large {
-            background: var(--light-sage);
-            color: var(--dark-text);
-            padding: 1.5rem 2rem;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            font-style: italic;
-            text-align: center;
-            margin-top: 1rem;
-            border: 2px solid var(--sage-green);
-            font-weight: 500;
-        }
-
-        @media (max-width: 600px) {
-            .container {
-                padding: 1rem 0.5rem;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .fic-card {
-                padding: 1rem;
-            }
-            
-            .kofi-section {
-                padding: 1.5rem;
-                margin: 1.5rem 0;
-            }
-            
-            .kofi-section h3 {
-                font-size: 1.4rem;
-            }
-            
-            .kofi-button {
-                padding: 0.7rem 1.5rem;
-                font-size: 0.9rem;
-            }
-        }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -289,369 +293,416 @@
             <p class="subtitle">current chapter progress</p>
         </header>
 
-        <div class="encouragement">
-            likes, reblogs and beautiful lovely comments make these percentages go up! ♡´･ᴗ･`♡
-        </div>
+```
+    <div class="encouragement">
+        likes, reblogs and beautiful lovely comments make these percentages go up! ♡´･ᴗ･`♡
+    </div>
 
-        <div class="kofi-section">
-            <div class="kofi-content">
-                <div class="kofi-icon">☕</div>
-                <h3>early access & sneak peeks</h3>
-                <p>get chapters before anyone else + juicy behind-the-scenes content on my ko-fi!</p>
-                <a href="https://ko-fi.com/jungkoode" target="_blank" class="kofi-button">
-                    support me on ko-fi ♡
-                </a>
-            </div>
-        </div>
-
-        <div class="fic-grid">
-            <!-- F.M.U. -->
-            <div class="fic-card">
-                <h2 class="fic-title">fuck me up ♪</h2>
-                <p class="fic-meta">fuck buddies • slow burn • roommates to lovers • psych. depth</p>
-                <span class="next-chapter">next chapter</span>
-                <div class="progress-section">
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span>writing</span>
-                            <span class="writing-percent">100%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill writing" style="width: 100%"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span>editing</span>
-                            <span class="editing-percent">100%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill editing" style="width: 100%"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span>working on aesthetics</span>
-                            <span class="aesthetics-percent">70%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill aesthetics" style="width: 70%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- KKANGPAE -->
-            <div class="fic-card">
-                <h2 class="fic-title">kkangpae ♪</h2>
-                <p class="fic-meta">gang au • violence • enemies to lovers • slow burn • fuck buddies</p>
-                <span class="next-chapter">next chapter</span>
-                <div class="progress-section">
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span>writing</span>
-                            <span class="writing-percent">100%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill writing" style="width: 100%"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span>editing</span>
-                            <span class="editing-percent">20%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill editing" style="width: 20%"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span>working on aesthetics</span>
-                            <span class="aesthetics-percent">0%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill aesthetics" style="width: 0%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- UNMANAGEABLE -->
-            <div class="fic-card">
-                <h2 class="fic-title">unmanageable ✎</h2>
-                <p class="fic-meta">entertainment industry • pure hatred to love • manager x actor</p>
-                <div class="backlog-large">backlogging chapters</div>
-            </div>
-
-            <!-- MARGINS -->
-            <div class="fic-card">
-                <h2 class="fic-title">margins ✎</h2>
-                <p class="fic-meta">publishing industry • cat vs. dog • workplace romance • romcom</p>
-                <div class="backlog-large">backlogging chapters</div>
-            </div>
-
-            <!-- STRINGS ATTACHED -->
-            <div class="fic-card">
-                <h2 class="fic-title">strings attached (to my heart) ✓ ♪</h2>
-                <p class="fic-meta">spiderman au • college • virgin!jungkook • spiderkook</p>
-                <span class="next-chapter">next chapter</span>
-                <div class="progress-section">
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span>writing</span>
-                            <span class="writing-percent">0%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill writing" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span>editing</span>
-                            <span class="editing-percent">0%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill editing" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span>working on aesthetics</span>
-                            <span class="aesthetics-percent">0%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill aesthetics" style="width: 0%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- THE 25TH HOUR -->
-            <div class="fic-card">
-                <h2 class="fic-title">the 25th hour ♪</h2>
-                <p class="fic-meta">dystopian • time-bending • psychological • starcrossed+fated lovers</p>
-                <span class="next-chapter">next chapter</span>
-                <div class="progress-section">
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span>writing</span>
-                            <span class="writing-percent">100%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill writing" style="width: 100%"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span>editing</span>
-                            <span class="editing-percent">100%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill editing" style="width: 100%"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span>working on aesthetics</span>
-                            <span class="aesthetics-percent">0%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill aesthetics" style="width: 0%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- WE GREW UP SOMEWHERE ALONG THE WAY -->
-            <div class="fic-card">
-                <h2 class="fic-title">we grew up somewhere along the way ♪</h2>
-                <p class="fic-meta">osaka 2003 • childhood friends to lovers • grumpy x sunshine</p>
-                <span class="next-chapter">next chapter</span>
-                <div class="progress-section">
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span>writing</span>
-                            <span class="writing-percent">100%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill writing" style="width: 100%"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span>editing</span>
-                            <span class="editing-percent">50%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill editing" style="width: 50%"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span>working on aesthetics</span>
-                            <span class="aesthetics-percent">0%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill aesthetics" style="width: 0%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <!-- CODE: EPITAPH -->
-            <div class="fic-card">
-                <h2 class="fic-title">code : epitaph ♪</h2>
-                <p class="fic-meta">dystopian • blood bonds • 60 days survival • e2l—pure hatred</p>
-                <span class="next-chapter">next chapter</span>
-                <div class="progress-section">
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span>writing</span>
-                            <span class="writing-percent">100%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill writing" style="width: 100%"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span>editing</span>
-                            <span class="editing-percent">60%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill editing" style="width: 60%"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span>working on aesthetics</span>
-                            <span class="aesthetics-percent">0%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill aesthetics" style="width: 0%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 5 SECONDS TO FREEDOM -->
-            <div class="fic-card">
-                <h2 class="fic-title">5 seconds to freedom ♪</h2>
-                <p class="fic-meta">street racing • tokyo • heiress x racer • rivals to lovers • latino!jimin</p>
-                <span class="next-chapter">next chapter</span>
-                <div class="progress-section">
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span>writing</span>
-                            <span class="writing-percent">50%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill writing" style="width: 50%"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span>editing</span>
-                            <span class="editing-percent">0%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill editing" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span>working on aesthetics</span>
-                            <span class="aesthetics-percent">0%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill aesthetics" style="width: 0%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- OUT OF LINE -->
-            <div class="fic-card">
-                <h2 class="fic-title">out of line ♪</h2>
-                <p class="fic-meta">football • real madrid • arrogant!tae • slowburn</p>
-                <span class="next-chapter">next chapter</span>
-                <div class="progress-section">
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span>writing</span>
-                            <span class="writing-percent">0%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill writing" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span>editing</span>
-                            <span class="editing-percent">0%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill editing" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span>working on aesthetics</span>
-                            <span class="aesthetics-percent">0%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill aesthetics" style="width: 0%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ALTARS IN SHALLOW WATERS -->
-            <div class="fic-card">
-                <h2 class="fic-title">altars in shallow waters ♪</h2>
-                <p class="fic-meta">stalker!tae • ballerina!reader • paris • psychological • dark romance</p>
-                <span class="next-chapter">next chapter</span>
-                <div class="progress-section">
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span>writing</span>
-                            <span class="writing-percent">100%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill writing" style="width: 100%"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span>editing</span>
-                            <span class="editing-percent">10%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill editing" style="width: 10%"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span>working on aesthetics</span>
-                            <span class="aesthetics-percent">0%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill aesthetics" style="width: 0%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- IN THE PRESENCE OF YOU -->
-            <div class="fic-card">
-                <h2 class="fic-title">in the presence of you ✎</h2>
-                <p class="fic-meta">royalty • 1700s/1800s • arranged marriage • slow burn</p>
-                <div class="backlog-large">backlogging chapters</div>
-            </div>
+    <div class="kofi-section">
+        <div class="kofi-content">
+            <div class="kofi-icon">☕</div>
+            <h3>early access & sneak peeks</h3>
+            <p>get chapters before anyone else + juicy behind-the-scenes content on my ko-fi!</p>
+            <a href="https://ko-fi.com/jungkoode" target="_blank" class="kofi-button">
+                support me on ko-fi ♡
+            </a>
         </div>
     </div>
+
+    <div class="fic-grid" id="ficGrid">
+        <!-- F.M.U. -->
+        <div class="fic-card" data-writing="100" data-editing="100" data-aesthetics="70">
+            <h2 class="fic-title">fuck me up ♪</h2>
+            <p class="fic-meta">fuck buddies • slow burn • roommates to lovers • psych. depth</p>
+            <span class="next-chapter">next chapter</span>
+            <div class="progress-section">
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>writing</span>
+                        <span class="writing-percent">100%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill writing" style="width: 100%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>editing</span>
+                        <span class="editing-percent">100%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill editing" style="width: 100%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>working on aesthetics</span>
+                        <span class="aesthetics-percent">70%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill aesthetics" style="width: 70%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KKANGPAE -->
+        <div class="fic-card" data-writing="100" data-editing="20" data-aesthetics="0">
+            <h2 class="fic-title">kkangpae ♪</h2>
+            <p class="fic-meta">gang au • violence • enemies to lovers • slow burn • fuck buddies</p>
+            <span class="next-chapter">next chapter</span>
+            <div class="progress-section">
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>writing</span>
+                        <span class="writing-percent">100%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill writing" style="width: 100%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>editing</span>
+                        <span class="editing-percent">20%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill editing" style="width: 20%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>working on aesthetics</span>
+                        <span class="aesthetics-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill aesthetics" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNMANAGEABLE -->
+        <div class="fic-card" data-backlog="true">
+            <h2 class="fic-title">unmanageable ✎</h2>
+            <p class="fic-meta">entertainment industry • pure hatred to love • manager x actor</p>
+            <div class="backlog-large">backlogging chapters</div>
+        </div>
+
+        <!-- MARGINS -->
+        <div class="fic-card" data-backlog="true">
+            <h2 class="fic-title">margins ✎</h2>
+            <p class="fic-meta">publishing industry • cat vs. dog • workplace romance • romcom</p>
+            <div class="backlog-large">backlogging chapters</div>
+        </div>
+
+        <!-- STRINGS ATTACHED -->
+        <div class="fic-card" data-writing="0" data-editing="0" data-aesthetics="0">
+            <h2 class="fic-title">strings attached (to my heart) ✓ ♪</h2>
+            <p class="fic-meta">spiderman au • college • virgin!jungkook • spiderkook</p>
+            <span class="next-chapter">next chapter</span>
+            <div class="progress-section">
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>writing</span>
+                        <span class="writing-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill writing" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>editing</span>
+                        <span class="editing-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill editing" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>working on aesthetics</span>
+                        <span class="aesthetics-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill aesthetics" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- THE 25TH HOUR -->
+        <div class="fic-card" data-writing="100" data-editing="100" data-aesthetics="0">
+            <h2 class="fic-title">the 25th hour ♪</h2>
+            <p class="fic-meta">dystopian • time-bending • psychological • starcrossed+fated lovers</p>
+            <span class="next-chapter">next chapter</span>
+            <div class="progress-section">
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>writing</span>
+                        <span class="writing-percent">100%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill writing" style="width: 100%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>editing</span>
+                        <span class="editing-percent">100%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill editing" style="width: 100%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>working on aesthetics</span>
+                        <span class="aesthetics-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill aesthetics" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WE GREW UP SOMEWHERE ALONG THE WAY -->
+        <div class="fic-card" data-writing="100" data-editing="50" data-aesthetics="0">
+            <h2 class="fic-title">we grew up somewhere along the way ♪</h2>
+            <p class="fic-meta">osaka 2003 • childhood friends to lovers • grumpy x sunshine</p>
+            <span class="next-chapter">next chapter</span>
+            <div class="progress-section">
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>writing</span>
+                        <span class="writing-percent">100%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill writing" style="width: 100%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>editing</span>
+                        <span class="editing-percent">50%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill editing" style="width: 50%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>working on aesthetics</span>
+                        <span class="aesthetics-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill aesthetics" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CODE: EPITAPH -->
+        <div class="fic-card" data-writing="100" data-editing="60" data-aesthetics="0">
+            <h2 class="fic-title">code : epitaph ♪</h2>
+            <p class="fic-meta">dystopian • blood bonds • 60 days survival • e2l—pure hatred</p>
+            <span class="next-chapter">next chapter</span>
+            <div class="progress-section">
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>writing</span>
+                        <span class="writing-percent">100%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill writing" style="width: 100%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>editing</span>
+                        <span class="editing-percent">60%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill editing" style="width: 60%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>working on aesthetics</span>
+                        <span class="aesthetics-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill aesthetics" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5 SECONDS TO FREEDOM -->
+        <div class="fic-card" data-writing="50" data-editing="0" data-aesthetics="0">
+            <h2 class="fic-title">5 seconds to freedom ♪</h2>
+            <p class="fic-meta">street racing • tokyo • heiress x racer • rivals to lovers • latino!jimin</p>
+            <span class="next-chapter">next chapter</span>
+            <div class="progress-section">
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>writing</span>
+                        <span class="writing-percent">50%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill writing" style="width: 50%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>editing</span>
+                        <span class="editing-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill editing" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>working on aesthetics</span>
+                        <span class="aesthetics-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill aesthetics" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OUT OF LINE -->
+        <div class="fic-card" data-writing="0" data-editing="0" data-aesthetics="0">
+            <h2 class="fic-title">out of line ♪</h2>
+            <p class="fic-meta">football • real madrid • arrogant!tae • slowburn</p>
+            <span class="next-chapter">next chapter</span>
+            <div class="progress-section">
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>writing</span>
+                        <span class="writing-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill writing" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>editing</span>
+                        <span class="editing-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill editing" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>working on aesthetics</span>
+                        <span class="aesthetics-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill aesthetics" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ALTARS IN SHALLOW WATERS -->
+        <div class="fic-card" data-writing="100" data-editing="10" data-aesthetics="0">
+            <h2 class="fic-title">altars in shallow waters ♪</h2>
+            <p class="fic-meta">stalker!tae • ballerina!reader • paris • psychological • dark romance</p>
+            <span class="next-chapter">next chapter</span>
+            <div class="progress-section">
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>writing</span>
+                        <span class="writing-percent">100%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill writing" style="width: 100%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>editing</span>
+                        <span class="editing-percent">10%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill editing" style="width: 10%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>working on aesthetics</span>
+                        <span class="aesthetics-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill aesthetics" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- IN THE PRESENCE OF YOU -->
+        <div class="fic-card" data-backlog="true">
+            <h2 class="fic-title">in the presence of you ✎</h2>
+            <p class="fic-meta">royalty • 1700s/1800s • arranged marriage • slow burn</p>
+            <div class="backlog-large">backlogging chapters</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const ficGrid = document.getElementById('ficGrid');
+        const ficCards = Array.from(ficGrid.querySelectorAll('.fic-card'));
+        
+        // Function to calculate progress score for sorting
+        function calculateProgressScore(card) {
+            // If it's a backlog card, give it the lowest priority
+            if (card.hasAttribute('data-backlog')) {
+                return -1;
+            }
+            
+            const writing = parseInt(card.getAttribute('data-writing') || 0);
+            const editing = parseInt(card.getAttribute('data-editing') || 0);
+            const aesthetics = parseInt(card.getAttribute('data-aesthetics') || 0);
+            
+            // Count complete bars (100%)
+            let completeBars = 0;
+            if (writing === 100) completeBars++;
+            if (editing === 100) completeBars++;
+            if (aesthetics === 100) completeBars++;
+            
+            // Calculate total progress as secondary sort criteria
+            const totalProgress = writing + editing + aesthetics;
+            
+            // Primary sort: complete bars (higher is better)
+            // Secondary sort: total progress (higher is better)
+            // Multiply complete bars by 1000 to make it the primary criteria
+            return (completeBars * 1000) + totalProgress;
+        }
+        
+        // Sort the fic cards by progress
+        ficCards.sort((a, b) => {
+            const scoreA = calculateProgressScore(a);
+            const scoreB = calculateProgressScore(b);
+            return scoreB - scoreA; // Descending order (highest progress first)
+        });
+        
+        // Clear the grid and re-append in sorted order
+        ficGrid.innerHTML = '';
+        ficCards.forEach(card => {
+            ficGrid.appendChild(card);
+        });
+    });
+</script>
+```
+
 </body>
 </html>
