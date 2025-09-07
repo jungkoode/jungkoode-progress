@@ -153,6 +153,23 @@
         border-color: white;
     }
 
+    .last-updated {
+        background: rgba(255, 255, 255, 0.9);
+        border: 2px solid var(--light-sage);
+        border-radius: 12px;
+        padding: 1rem 1.5rem;
+        margin: 1rem 0 2rem 0;
+        text-align: center;
+        font-style: italic;
+        color: var(--accent-green);
+        font-size: 0.95rem;
+    }
+
+    .last-updated strong {
+        color: var(--dark-text);
+        font-weight: 600;
+    }
+
     .fic-grid {
         display: grid;
         gap: 1.5rem;
@@ -283,6 +300,7 @@
         }
     }
 </style>
+```
 
 </head>
 <body>
@@ -292,6 +310,7 @@
             <p class="subtitle">current chapter progress</p>
         </header>
 
+```
     <div class="encouragement">
         likes, reblogs and beautiful lovely comments make these percentages go up! ♡´･ᴗ･`♡
     </div>
@@ -307,6 +326,10 @@
         </div>
     </div>
 
+    <div class="last-updated" data-last-updated="September 7, 2025">
+        <strong>last updated:</strong> <span class="update-date">September 7, 2025</span>
+    </div>
+
     <div class="fic-grid" id="ficGrid">
         <!-- F.M.U. -->
         <div class="fic-card" data-writing="80" data-editing="0" data-aesthetics="0">
@@ -317,10 +340,10 @@
                 <div class="progress-item">
                     <div class="progress-label">
                         <span>writing</span>
-                        <span class="writing-percent">80%</span>
+                        <span class="writing-percent">0%</span>
                     </div>
                     <div class="progress-bar">
-                        <div class="progress-fill writing" style="width: 80%"></div>
+                        <div class="progress-fill writing" style="width: 0%"></div>
                     </div>
                 </div>
                 <div class="progress-item">
@@ -353,10 +376,10 @@
                 <div class="progress-item">
                     <div class="progress-label">
                         <span>writing</span>
-                        <span class="writing-percent">100%</span>
+                        <span class="writing-percent">0%</span>
                     </div>
                     <div class="progress-bar">
-                        <div class="progress-fill writing" style="width: 100%"></div>
+                        <div class="progress-fill writing" style="width: 0%"></div>
                     </div>
                 </div>
                 <div class="progress-item">
@@ -439,19 +462,19 @@
                 <div class="progress-item">
                     <div class="progress-label">
                         <span>writing</span>
-                        <span class="writing-percent">100%</span>
+                        <span class="writing-percent">0%</span>
                     </div>
                     <div class="progress-bar">
-                        <div class="progress-fill writing" style="width: 100%"></div>
+                        <div class="progress-fill writing" style="width: 0%"></div>
                     </div>
                 </div>
                 <div class="progress-item">
                     <div class="progress-label">
                         <span>editing</span>
-                        <span class="editing-percent">40%</span>
+                        <span class="editing-percent">0%</span>
                     </div>
                     <div class="progress-bar">
-                        <div class="progress-fill editing" style="width: 40%"></div>
+                        <div class="progress-fill editing" style="width: 0%"></div>
                     </div>
                 </div>
                 <div class="progress-item">
@@ -475,10 +498,10 @@
                 <div class="progress-item">
                     <div class="progress-label">
                         <span>writing</span>
-                        <span class="writing-percent">35%</span>
+                        <span class="writing-percent">0%</span>
                     </div>
                     <div class="progress-bar">
-                        <div class="progress-fill writing" style="width: 35%"></div>
+                        <div class="progress-fill writing" style="width: 0%"></div>
                     </div>
                 </div>
                 <div class="progress-item">
@@ -547,19 +570,19 @@
                 <div class="progress-item">
                     <div class="progress-label">
                         <span>writing</span>
-                        <span class="writing-percent">100%</span>
+                        <span class="writing-percent">0%</span>
                     </div>
                     <div class="progress-bar">
-                        <div class="progress-fill writing" style="width: 100%"></div>
+                        <div class="progress-fill writing" style="width: 0%"></div>
                     </div>
                 </div>
                 <div class="progress-item">
                     <div class="progress-label">
                         <span>editing</span>
-                        <span class="editing-percent">55%</span>
+                        <span class="editing-percent">0%</span>
                     </div>
                     <div class="progress-bar">
-                        <div class="progress-fill editing" style="width: 55%"></div>
+                        <div class="progress-fill editing" style="width: 0%"></div>
                     </div>
                 </div>
                 <div class="progress-item">
@@ -583,10 +606,10 @@
                 <div class="progress-item">
                     <div class="progress-label">
                         <span>writing</span>
-                        <span class="writing-percent">35%</span>
+                        <span class="writing-percent">0%</span>
                     </div>
                     <div class="progress-bar">
-                        <div class="progress-fill writing" style="width: 35%"></div>
+                        <div class="progress-fill writing" style="width: 0%"></div>
                     </div>
                 </div>
                 <div class="progress-item">
@@ -619,10 +642,10 @@
                 <div class="progress-item">
                     <div class="progress-label">
                         <span>writing</span>
-                        <span class="writing-percent">100%</span>
+                        <span class="writing-percent">0%</span>
                     </div>
                     <div class="progress-bar">
-                        <div class="progress-fill writing" style="width: 100%"></div>
+                        <div class="progress-fill writing" style="width: 0%"></div>
                     </div>
                 </div>
                 <div class="progress-item">
@@ -657,11 +680,47 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('Sorting script started');
-        const ficGrid = document.getElementById('ficGrid');
-        const ficCards = Array.from(ficGrid.querySelectorAll('.fic-card'));
+        console.log('Initializing progress tracker...');
         
-        console.log('Found', ficCards.length, 'fic cards');
+        // Update the last updated date from data attribute
+        const lastUpdatedElement = document.querySelector('.last-updated');
+        const updateDate = lastUpdatedElement.getAttribute('data-last-updated');
+        lastUpdatedElement.querySelector('.update-date').textContent = updateDate;
+        
+        // Function to update progress bars based on data attributes
+        function updateProgressBars() {
+            const ficCards = document.querySelectorAll('.fic-card[data-writing]');
+            
+            ficCards.forEach(card => {
+                const writing = parseInt(card.getAttribute('data-writing') || 0);
+                const editing = parseInt(card.getAttribute('data-editing') || 0);
+                const aesthetics = parseInt(card.getAttribute('data-aesthetics') || 0);
+                
+                // Update writing progress
+                const writingPercent = card.querySelector('.writing-percent');
+                const writingFill = card.querySelector('.progress-fill.writing');
+                if (writingPercent && writingFill) {
+                    writingPercent.textContent = writing + '%';
+                    writingFill.style.width = writing + '%';
+                }
+                
+                // Update editing progress
+                const editingPercent = card.querySelector('.editing-percent');
+                const editingFill = card.querySelector('.progress-fill.editing');
+                if (editingPercent && editingFill) {
+                    editingPercent.textContent = editing + '%';
+                    editingFill.style.width = editing + '%';
+                }
+                
+                // Update aesthetics progress
+                const aestheticsPercent = card.querySelector('.aesthetics-percent');
+                const aestheticsFill = card.querySelector('.progress-fill.aesthetics');
+                if (aestheticsPercent && aestheticsFill) {
+                    aestheticsPercent.textContent = aesthetics + '%';
+                    aestheticsFill.style.width = aesthetics + '%';
+                }
+            });
+        }
         
         // Function to calculate progress score for sorting
         function calculateProgressScore(card) {
@@ -688,33 +747,44 @@
             // Multiply complete bars by 1000 to make it the primary criteria
             const score = (completeBars * 1000) + totalProgress;
             
-            // Debug logging
-            const title = card.querySelector('.fic-title').textContent;
-            console.log(`${title}: W:${writing} E:${editing} A:${aesthetics} = ${completeBars} complete bars, total:${totalProgress}, score:${score}`);
-            
             return score;
         }
         
-        // Sort the fic cards by progress
-        ficCards.sort((a, b) => {
-            const scoreA = calculateProgressScore(a);
-            const scoreB = calculateProgressScore(b);
-            return scoreB - scoreA; // Descending order (highest progress first)
-        });
+        // Sort and update progress bars
+        function sortAndUpdateFics() {
+            const ficGrid = document.getElementById('ficGrid');
+            const ficCards = Array.from(ficGrid.querySelectorAll('.fic-card'));
+            
+            console.log('Found', ficCards.length, 'fic cards');
+            
+            // Sort the fic cards by progress
+            ficCards.sort((a, b) => {
+                const scoreA = calculateProgressScore(a);
+                const scoreB = calculateProgressScore(b);
+                return scoreB - scoreA; // Descending order (highest progress first)
+            });
+            
+            console.log('Sorting complete, reordering cards...');
+            
+            // Clear the grid and re-append in sorted order
+            ficGrid.innerHTML = '';
+            ficCards.forEach((card, index) => {
+                const title = card.querySelector('.fic-title').textContent;
+                console.log(`Position ${index + 1}: ${title}`);
+                ficGrid.appendChild(card);
+            });
+            
+            console.log('Reordering complete!');
+        }
         
-        console.log('Sorting complete, reordering cards...');
+        // Initialize everything
+        updateProgressBars();
+        sortAndUpdateFics();
         
-        // Clear the grid and re-append in sorted order
-        ficGrid.innerHTML = '';
-        ficCards.forEach((card, index) => {
-            const title = card.querySelector('.fic-title').textContent;
-            console.log(`Position ${index + 1}: ${title}`);
-            ficGrid.appendChild(card);
-        });
-        
-        console.log('Reordering complete!');
+        console.log('Progress tracker initialized successfully!');
     });
 </script>
+```
 
 </body>
 </html>
