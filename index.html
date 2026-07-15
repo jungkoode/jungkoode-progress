@@ -3,18 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>jungkoode's fanfiction progress</title>
+    <title>jungkoode's writing desk</title>
 
     <script>
-    // update this + the numbers below, everything else updates itself
+    // update the date + the numbers below, everything else updates itself
+    // optional per fic: note: "..." (shows when card is opened), link: "https://..." (adds a read button)
+    // snippets — paste the ones you've already posted publicly:
+    //   wrap each snippet in backticks ` like this ` — line breaks, quotes and <channel dialogue> all work.
+    //   regular fics:  snippets: [`first snippet`, `second snippet`]
+    //     → adds a "read a random snippet ✧" button inside the card (see the 25th hour for a live example)
+    //   chapter fics:  snippets: { 24: [`snippet from ch 24`], 19: [`one`, `another`] }
+    //     → those chapter chips get a ❝ mark and become tappable, showing a random snippet from that chapter
     const LAST_UPDATED = "July 14th, 2026";
 
     const FICS = [
       { title: "fuck me up ♪", meta: "fuck buddies • slow burn • roommates to lovers • psych. depth", writing: 100, editing: 0, aesthetics: 0 },
-      { title: "geumji ✎", meta: "gang au • violence • enemies to lovers • slow burn • fuck buddies", backlog: true },
+      { title: "geumji ✎", meta: "gang au • violence • enemies to lovers • slow burn • fuck buddies", backlog: true, note: "book 2 of the kkangpae gyori trilogy" },
       { title: "unmanageable ✎", meta: "entertainment industry • pure hatred to love • manager x actor", backlog: true },
       { title: "margins ✎", meta: "publishing industry • cat vs. dog • workplace romance • romcom", backlog: true },
-      { title: "the 25th hour ♪", meta: "dystopian • time-bending • psychological • starcrossed+fated lovers", writing: 100, editing: 100, aesthetics: 0 },
+      { title: "the 25th hour ♪", meta: "dystopian • time-bending • psychological • starcrossed+fated lovers", writing: 100, editing: 100, aesthetics: 0,
+        snippets: [
+`<He's like fifteen,> he says over the channel. <Maybe sixteen.>
+
+<I know,> Taehyung replies.
+
+You observe the thief's posture, his age markers, the worn-down heels of his shoes.
+
+<You two are not far removed,> you contemplate.
+
+<HEY,> Jungkook replies, with the full weight of personal injury. <I am physically twenty-two. For your information.>
+
+<Technically,> Taehyung responds, with the specific flatness of someone who has been saving this observation, <reset-age wise you're sitting somewhere around one hundred and fifty. And yet.>
+
+<And yet I have the energy and the vision of someone in their prime, which is more than I can say for certain people. Some people who are like three hundred and complain about their knees.>
+
+<I don't complain about my knees.>
+
+<You sat down for four minutes after that stairs run last week.>
+
+<That was tactical recovery.>
+
+<That was your knees.>
+
+<Jungkook.>`,
+
+`Then Jungkook's voice arrives at a frequency that probably violates CHRONOS noise regulations.
+
+“MY CLOAK—”
+
+The wail has the texture of a man watching his most valuable thing vanish off a cliff in slow motion. His hands hover in the empty air where the fabric used to be, fingers curved, not yet processing that there's nothing left to hold.
+
+His lower lip actually trembles.
+
+You catalog this as disproportionate grief. The ring in front of you is objectively more interesting. The cloak was never his. And yet Jungkook's face has achieved a quality of devastation that borders on art.`,
+
+`“It's not your fault,” he says, and the concession is so clearly fought for that you can track the effort in his jaw. “It's not your fault. I know that. Rationally, I know that. Your memories get wiped. Everything goes to shit and you start clean and I don't, and all I can do is stay mad.”
+
+“That seems like a reasonable response.”
+
+Jimin turns his head to look at you for the first time since he lay down.
+
+“Yeah,” he sighs. “It is.”
+
+He looks at the ceiling again.
+
+“So I stay mad,” he concludes. “Because I've got to do something with it. And mad at least keeps me awake.”`
+        ] },
       { title: "we grew up somewhere along the way ♪", meta: "osaka 2003 • childhood friends to lovers • grumpy x sunshine", writing: 100, editing: 100, aesthetics: 20 },
       { title: "code : epitaph ♪", meta: "dystopian • blood bonds • 60 days survival • e2l—pure hatred", writing: 75, editing: 0, aesthetics: 0 },
       { title: "5 seconds to freedom ♪", meta: "street racing • tokyo • heiress x racer • rivals to lovers • latino!jimin", writing: 100, editing: 0, aesthetics: 0 },
@@ -27,239 +81,370 @@
         ] },
       { title: "in the presence of you ✎", meta: "royalty • 1700s/1800s • arranged marriage • slow burn", backlog: true },
     ];
+
+    const KOFI_URL = "https://ko-fi.com/jungkoode";
     </script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Karla:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --peri-bg: #D7E0FF;
-            --peri-soft: #CACFE6;
-            --peri-medium: #B3BAD7;
-            --peri-greylav: #A3A9BF;
-            --peri-deep: #8D93A8;
-            --peri-slate: #777D92;
-            --peri-ice: #EAEEF8;
-            --dark-text: #383D50;
-            --progress-bg: #EAEEF8;
+            --ice: #EAEEF8;
+            --bg: #D7E0FF;
+            --soft: #CACFE6;
+            --medium: #B3BAD7;
+            --greylav: #A3A9BF;
+            --deep: #8D93A8;
+            --slate: #777D92;
+            --ink: #383D50;
+            --paper: rgba(255, 255, 255, 0.82);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--peri-ice) 0%, var(--peri-bg) 100%);
-            color: var(--dark-text);
+            font-family: 'Karla', sans-serif;
+            background:
+                radial-gradient(ellipse 80% 50% at 20% -10%, rgba(255,255,255,0.7), transparent),
+                linear-gradient(160deg, var(--ice) 0%, var(--bg) 55%, var(--soft) 100%);
+            background-attachment: fixed;
+            color: var(--ink);
             min-height: 100vh;
             line-height: 1.6;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 720px;
             margin: 0 auto;
-            padding: 2rem 1rem;
+            padding: 2.5rem 1.25rem 3rem;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-        }
+        /* ---------- header ---------- */
 
-        .header::before {
-            content: '✦ ✦ ✦';
+        .header { text-align: center; margin-bottom: 2rem; }
+
+        .header .stars {
+            color: var(--medium);
+            letter-spacing: 1.4rem;
+            font-size: 1.1rem;
             display: block;
-            font-size: 1.5rem;
-            color: var(--peri-medium);
-            margin-bottom: 1rem;
-            letter-spacing: 2rem;
+            margin-bottom: 0.8rem;
+            padding-left: 1.4rem; /* balances letter-spacing */
         }
 
         h1 {
-            font-family: 'Crimson Text', serif;
-            font-size: 2.5rem;
+            font-family: 'Fraunces', serif;
             font-weight: 600;
-            color: var(--peri-slate);
-            margin-bottom: 0.5rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            font-size: clamp(2.1rem, 7vw, 2.8rem);
+            letter-spacing: -0.02em;
+            color: var(--ink);
+        }
+
+        h1 em {
+            font-style: italic;
+            color: var(--slate);
         }
 
         .subtitle {
             font-style: italic;
-            color: var(--peri-slate);
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
+            color: var(--slate);
+            margin-top: 0.3rem;
+        }
+
+        .updated {
+            display: inline-block;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--slate);
+            background: var(--paper);
+            border: 1px solid var(--soft);
+            border-radius: 999px;
+            padding: 0.25rem 0.9rem;
         }
 
         .encouragement {
-            background: var(--peri-soft);
-            padding: 1rem 1.5rem;
-            border-radius: 15px;
-            margin: 2rem 0;
             text-align: center;
             font-style: italic;
-            border-left: 4px solid var(--peri-medium);
-        }
-
-        .kofi-section {
-            background: linear-gradient(135deg, var(--peri-medium), var(--peri-slate));
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 2rem 0;
-            text-align: center;
-            color: white;
-            box-shadow: 0 6px 20px rgba(119, 125, 146, 0.35);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .kofi-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: shimmer 3s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0%, 100% { transform: translateX(-100%) translateY(-100%) rotate(0deg); }
-            50% { transform: translateX(0%) translateY(0%) rotate(180deg); }
-        }
-
-        .kofi-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .kofi-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
-        }
-
-        .kofi-section h3 {
-            font-family: 'Crimson Text', serif;
-            font-size: 1.6rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-
-        .kofi-section p {
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
-            opacity: 0.95;
-            font-style: italic;
-        }
-
-        .kofi-button {
-            background: white;
-            color: var(--peri-slate);
-            padding: 0.8rem 2rem;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-block;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            border: 2px solid transparent;
-        }
-
-        .kofi-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            background: var(--peri-ice);
-            border-color: white;
-        }
-
-        .last-updated {
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid var(--peri-soft);
-            border-radius: 12px;
-            padding: 1rem 1.5rem;
-            margin: 1rem 0 2rem 0;
-            text-align: center;
-            font-style: italic;
-            color: var(--peri-slate);
+            color: var(--slate);
             font-size: 0.95rem;
+            margin: 1.4rem auto 2.2rem;
+            max-width: 34rem;
         }
 
-        .last-updated strong {
-            color: var(--dark-text);
-            font-weight: 600;
-        }
+        /* ---------- up next spotlight ---------- */
 
-        .fic-grid {
-            display: grid;
+        .spotlight {
+            background: var(--paper);
+            border: 1px solid var(--soft);
+            border-radius: 20px;
+            padding: 1.6rem;
+            display: flex;
             gap: 1.5rem;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(141, 147, 168, 0.22);
+            margin-bottom: 2.4rem;
+            position: relative;
         }
+
+        .spotlight::before {
+            content: 'up next on the desk';
+            position: absolute;
+            top: -0.75rem;
+            left: 1.4rem;
+            background: var(--ink);
+            color: var(--ice);
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            padding: 0.2rem 0.8rem;
+            border-radius: 999px;
+        }
+
+        .ring-wrap {
+            flex: 0 0 auto;
+            width: 128px;
+            height: 128px;
+            position: relative;
+        }
+
+        .ring-wrap svg { transform: rotate(-90deg); }
+
+        .ring-track { stroke: var(--ice); }
+
+        .ring-fill {
+            stroke: url(#ringGradient);
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .ring-label {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ring-label .pct {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            font-size: 1.9rem;
+            line-height: 1;
+        }
+
+        .ring-label .pct-sub {
+            font-size: 0.7rem;
+            color: var(--slate);
+            letter-spacing: 0.08em;
+        }
+
+        .spotlight-info { min-width: 0; }
+
+        .spotlight-title {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            font-size: 1.45rem;
+            line-height: 1.25;
+            margin-bottom: 0.35rem;
+        }
+
+        .spotlight-status {
+            font-size: 0.85rem;
+            color: var(--slate);
+            font-style: italic;
+            margin-bottom: 0.7rem;
+        }
+
+        /* ---------- filters ---------- */
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 1.6rem;
+        }
+
+        .filter-chip {
+            font-family: 'Karla', sans-serif;
+            font-size: 0.85rem;
+            border: 1px solid var(--soft);
+            background: var(--paper);
+            color: var(--slate);
+            border-radius: 999px;
+            padding: 0.35rem 1rem;
+            cursor: pointer;
+            transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+        }
+
+        .filter-chip:hover { border-color: var(--medium); }
+
+        .filter-chip.active {
+            background: var(--ink);
+            color: var(--ice);
+            border-color: var(--ink);
+        }
+
+        .filter-chip:focus-visible,
+        .fic-toggle:focus-visible,
+        .kofi-button:focus-visible {
+            outline: 2px solid var(--slate);
+            outline-offset: 2px;
+        }
+
+        /* ---------- shelf ---------- */
+
+        .shelf { display: grid; gap: 1rem; }
 
         .fic-card {
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 15px rgba(141, 147, 168, 0.18);
-            border: 1px solid var(--peri-soft);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: var(--paper);
+            border: 1px solid var(--soft);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
         }
 
         .fic-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(141, 147, 168, 0.3);
+            box-shadow: 0 8px 22px rgba(141, 147, 168, 0.25);
+        }
+
+        .fic-card.hidden { display: none; }
+
+        .fic-toggle {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            font: inherit;
+            color: inherit;
+            padding: 1.1rem 1.25rem;
+            cursor: pointer;
+        }
+
+        .fic-top {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 0.75rem;
         }
 
         .fic-title {
-            font-family: 'Crimson Text', serif;
-            font-size: 1.4rem;
+            font-family: 'Fraunces', serif;
             font-weight: 600;
-            color: var(--dark-text);
-            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            line-height: 1.3;
         }
 
-        .fic-meta {
-            font-size: 0.9rem;
-            color: var(--peri-slate);
-            margin-bottom: 1rem;
+        .status-badge {
+            flex: 0 0 auto;
+            font-size: 0.72rem;
+            letter-spacing: 0.06em;
+            border-radius: 999px;
+            padding: 0.18rem 0.7rem;
+            white-space: nowrap;
+        }
+
+        .status-drafting  { background: var(--ice);    color: var(--slate); border: 1px solid var(--soft); }
+        .status-editing   { background: var(--soft);   color: var(--ink); }
+        .status-polishing { background: var(--medium); color: white; }
+        .status-ready     { background: var(--ink);    color: var(--ice); }
+        .status-resting   { background: transparent;   color: var(--slate); border: 1px dashed var(--greylav); }
+
+        .trope-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            margin: 0.55rem 0 0.8rem;
+        }
+
+        .trope {
+            font-size: 0.72rem;
+            color: var(--slate);
+            background: var(--ice);
+            border-radius: 999px;
+            padding: 0.1rem 0.6rem;
+        }
+
+        .overall-row {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .overall-bar {
+            flex: 1;
+            height: 7px;
+            background: var(--ice);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .overall-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--slate), var(--medium));
+            transition: width 1s ease-out;
+        }
+
+        .overall-pct {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--slate);
+            min-width: 2.6rem;
+            text-align: right;
+        }
+
+        .open-hint {
+            font-size: 0.75rem;
+            color: var(--greylav);
+            margin-top: 0.55rem;
             font-style: italic;
         }
 
-        .next-chapter {
-            background: var(--peri-medium);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            display: inline-block;
-            margin-bottom: 1rem;
+        .resting-line {
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--slate);
         }
 
-        .progress-section {
-            margin-top: 1rem;
+        /* ---------- unfolding detail ---------- */
+
+        .fic-detail {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.45s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        .progress-item {
-            margin-bottom: 0.8rem;
+        .fic-card.open .fic-detail { grid-template-rows: 1fr; }
+
+        .fic-detail-inner {
+            overflow: hidden;
+            padding: 0 1.25rem;
         }
+
+        .fic-card.open .fic-detail-inner { padding-bottom: 1.2rem; }
+
+        .detail-divider {
+            border: none;
+            border-top: 1px dashed var(--soft);
+            margin-bottom: 0.9rem;
+        }
+
+        .progress-item { margin-bottom: 0.7rem; }
 
         .progress-label {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 0.3rem;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
+            margin-bottom: 0.25rem;
         }
 
         .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: var(--progress-bg);
+            height: 7px;
+            background: var(--ice);
             border-radius: 4px;
             overflow: hidden;
         }
@@ -267,246 +452,549 @@
         .progress-fill {
             height: 100%;
             border-radius: 4px;
-            transition: width 0.8s ease-in-out;
+            width: 0%;
+            transition: width 0.9s ease-out;
         }
 
-        .writing { background: linear-gradient(90deg, var(--peri-medium), var(--peri-soft)); }
-        .editing { background: linear-gradient(90deg, var(--peri-deep), var(--peri-medium)); }
-        .aesthetics { background: linear-gradient(90deg, var(--peri-slate), var(--peri-deep)); }
+        .fill-writing    { background: linear-gradient(90deg, var(--medium), var(--soft)); }
+        .fill-editing    { background: linear-gradient(90deg, var(--deep), var(--medium)); }
+        .fill-aesthetics { background: linear-gradient(90deg, var(--slate), var(--deep)); }
+
+        .author-note {
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--slate);
+            background: var(--ice);
+            border-left: 3px solid var(--medium);
+            border-radius: 0 8px 8px 0;
+            padding: 0.5rem 0.8rem;
+            margin-top: 0.9rem;
+        }
+
+        .read-link {
+            display: inline-block;
+            margin-top: 0.9rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--ink);
+            text-decoration: none;
+            border-bottom: 2px solid var(--medium);
+        }
+
+        .read-link:hover { border-bottom-color: var(--ink); }
+
+        /* chapter grid (asw-style fics) */
 
         .chapter-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 0.5rem;
-            margin-top: 1rem;
+            gap: 0.45rem;
         }
 
         .chapter-chip {
-            background: var(--peri-ice);
-            border: 1px solid var(--peri-soft);
+            background: var(--ice);
+            border: 1px solid var(--soft);
             border-radius: 8px;
-            padding: 0.4rem 0.5rem;
+            padding: 0.35rem 0.45rem;
             text-align: center;
         }
 
         .chapter-chip.edited {
-            background: var(--peri-soft);
-            border-color: var(--peri-medium);
+            background: var(--soft);
+            border-color: var(--medium);
         }
 
         .chapter-num {
-            font-size: 0.8rem;
-            font-weight: 500;
+            font-size: 0.78rem;
+            font-weight: 600;
             display: block;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.25rem;
         }
 
-        .chapter-num .check {
-            color: var(--peri-slate);
-            font-size: 0.7rem;
-            margin-left: 0.15rem;
-        }
+        .chapter-num .check { color: var(--slate); font-size: 0.68rem; margin-left: 0.1rem; }
 
         .mini-bar {
-            width: 100%;
-            height: 5px;
+            height: 4px;
             background: rgba(255, 255, 255, 0.9);
             border-radius: 3px;
             overflow: hidden;
         }
 
-        .mini-bar + .mini-bar {
-            margin-top: 3px;
-        }
+        .mini-bar + .mini-bar { margin-top: 3px; }
 
         .mini-fill {
             height: 100%;
             border-radius: 3px;
-            background: linear-gradient(90deg, var(--peri-deep), var(--peri-medium));
-            transition: width 0.8s ease-in-out;
+            width: 0%;
+            background: linear-gradient(90deg, var(--deep), var(--medium));
+            transition: width 0.9s ease-out;
         }
 
-        .mini-fill.edit {
-            background: linear-gradient(90deg, var(--peri-slate), var(--peri-deep));
-        }
+        .mini-fill.edit { background: linear-gradient(90deg, var(--slate), var(--deep)); }
 
         .chapter-legend {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-style: italic;
-            color: var(--peri-slate);
-            margin-top: 0.6rem;
+            color: var(--slate);
+            margin-top: 0.55rem;
             text-align: right;
         }
 
-        .backlog-large {
-            background: var(--peri-soft);
-            color: var(--dark-text);
-            padding: 1.5rem 2rem;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            font-style: italic;
-            text-align: center;
-            margin-top: 1rem;
-            border: 2px solid var(--peri-medium);
-            font-weight: 500;
+        /* ---------- snippets ---------- */
+
+        .snippet-btn {
+            font-family: 'Karla', sans-serif;
+            font-size: 0.85rem;
+            color: var(--slate);
+            background: var(--ice);
+            border: 1px solid var(--soft);
+            border-radius: 999px;
+            padding: 0.4rem 1.1rem;
+            margin-top: 0.9rem;
+            cursor: pointer;
+            transition: border-color 0.25s ease, color 0.25s ease;
         }
 
-        @media (max-width: 600px) {
-            .container {
-                padding: 1rem 0.5rem;
-            }
+        .snippet-btn:hover { border-color: var(--medium); color: var(--ink); }
 
-            h1 {
-                font-size: 2rem;
-            }
+        .snippet-box {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-size: 0.95rem;
+            line-height: 1.55;
+            color: var(--ink);
+            background: var(--ice);
+            border-left: 3px solid var(--deep);
+            border-radius: 0 10px 10px 0;
+            padding: 0.75rem 1rem;
+            margin-top: 0.8rem;
+        }
 
-            .fic-card {
-                padding: 1rem;
-            }
+        .snippet-src {
+            display: block;
+            font-family: 'Karla', sans-serif;
+            font-style: normal;
+            font-size: 0.72rem;
+            color: var(--slate);
+            margin-top: 0.4rem;
+        }
 
-            .kofi-section {
-                padding: 1.5rem;
-                margin: 1.5rem 0;
-            }
+        .chapter-chip.has-snippet {
+            cursor: pointer;
+            transition: border-color 0.25s ease, transform 0.25s ease;
+        }
 
-            .kofi-section h3 {
-                font-size: 1.4rem;
-            }
+        .chapter-chip.has-snippet:hover {
+            border-color: var(--deep);
+            transform: translateY(-1px);
+        }
 
-            .kofi-button {
-                padding: 0.7rem 1.5rem;
-                font-size: 0.9rem;
-            }
+        .chapter-chip.has-snippet:focus-visible {
+            outline: 2px solid var(--slate);
+            outline-offset: 2px;
+        }
 
-            .chapter-grid {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 0.4rem;
-            }
+        .snip-mark {
+            color: var(--deep);
+            font-size: 0.68rem;
+            margin-left: 0.15rem;
+        }
+
+        /* ---------- sparkles ---------- */
+
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            color: var(--medium);
+            font-size: 0.9rem;
+            animation: floatUp 1s ease-out forwards;
+            z-index: 10;
+        }
+
+        @keyframes floatUp {
+            from { opacity: 1; transform: translateY(0) scale(1); }
+            to   { opacity: 0; transform: translateY(-42px) scale(0.4); }
+        }
+
+        /* ---------- ko-fi ---------- */
+
+        .kofi {
+            margin-top: 2.6rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--medium), var(--slate));
+            color: white;
+            border-radius: 20px;
+            padding: 1.8rem 1.5rem;
+            box-shadow: 0 10px 30px rgba(119, 125, 146, 0.3);
+        }
+
+        .kofi h2 {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            font-size: 1.35rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .kofi p {
+            font-size: 0.92rem;
+            font-style: italic;
+            opacity: 0.95;
+            margin-bottom: 1.1rem;
+        }
+
+        .kofi-button {
+            display: inline-block;
+            background: white;
+            color: var(--slate);
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 999px;
+            padding: 0.65rem 1.7rem;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .kofi-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer {
+            text-align: center;
+            color: var(--greylav);
+            font-size: 0.85rem;
+            margin-top: 2.2rem;
+            letter-spacing: 0.6rem;
+            padding-left: 0.6rem;
+        }
+
+        /* ---------- responsive + motion ---------- */
+
+        @media (max-width: 540px) {
+            .spotlight { flex-direction: column; text-align: center; padding-top: 2rem; }
+            .spotlight::before { left: 50%; transform: translateX(-50%); }
+            .spotlight .trope-row { justify-content: center; }
+            .fic-top { flex-wrap: wrap; }
+            .chapter-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ring-fill, .overall-fill, .progress-fill, .mini-fill, .fic-detail { transition: none; }
+            .sparkle { display: none; }
         }
     </style>
 </head>
 <body>
     <div class="container">
+
         <header class="header">
-            <h1>jungkoode's fanfiction</h1>
-            <p class="subtitle">current chapter progress</p>
+            <span class="stars">✦ ✦ ✦</span>
+            <h1>jungkoode's <em>writing desk</em></h1>
+            <p class="subtitle">where all my fics are quietly coming to life</p>
+            <span class="updated">last updated: <span class="update-date"></span></span>
         </header>
 
-        <div class="encouragement">
-            likes, reblogs and beautiful lovely comments make these percentages go up! ♡´･ᴗ･`♡
+        <p class="encouragement">likes, reblogs and beautiful lovely comments make these percentages go up! ♡´･ᴗ･`♡</p>
+
+        <section class="spotlight" id="spotlight" aria-label="fic closest to posting"></section>
+
+        <div class="filters" id="filters" role="group" aria-label="filter fics">
+            <button class="filter-chip active" data-filter="all">all</button>
+            <button class="filter-chip" data-filter="close">close to posting</button>
+            <button class="filter-chip" data-filter="working">in the works</button>
+            <button class="filter-chip" data-filter="resting">resting 🌙</button>
         </div>
 
-        <div class="kofi-section">
-            <div class="kofi-content">
-                <div class="kofi-icon">☕</div>
-                <h3>early access &amp; sneak peeks</h3>
-                <p>get chapters before anyone else + juicy behind-the-scenes content on my ko-fi!</p>
-                <a href="https://ko-fi.com/jungkoode" target="_blank" class="kofi-button">
-                    support me on ko-fi ♡
-                </a>
-            </div>
-        </div>
+        <main class="shelf" id="shelf"></main>
 
-        <div class="last-updated">
-            <strong>last updated:</strong> <span class="update-date"></span>
-        </div>
+        <section class="kofi">
+            <h2>early access &amp; sneak peeks ☕</h2>
+            <p>get chapters before anyone else + juicy behind-the-scenes content</p>
+            <a class="kofi-button" id="kofiLink" href="#" target="_blank" rel="noopener">support me on ko-fi ♡</a>
+        </section>
 
-        <div class="fic-grid" id="ficGrid"></div>
+        <footer class="footer">✦ ✦ ✦</footer>
     </div>
+
+    <!-- gradient definition for the spotlight ring -->
+    <svg width="0" height="0" aria-hidden="true">
+        <defs>
+            <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#777D92"/>
+                <stop offset="100%" stop-color="#B3BAD7"/>
+            </linearGradient>
+        </defs>
+    </svg>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+
             document.querySelector('.update-date').textContent = LAST_UPDATED;
+            document.getElementById('kofiLink').href = KOFI_URL;
 
-            function progressScore(fic) {
-                if (fic.backlog) return -1;
+            var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+            /* ----- derived numbers ----- */
+
+            function overallPct(fic) {
+                if (fic.backlog) return 0;
                 if (fic.chapters) {
-                    var wSum = 0, eSum = 0;
-                    fic.chapters.forEach(function(ch) {
-                        wSum += ch[1];
-                        eSum += ch[2];
-                    });
-                    var wAvg = wSum / fic.chapters.length;
-                    var eAvg = eSum / fic.chapters.length;
-                    var done = 0;
-                    if (wAvg === 100) done++;
-                    if (eAvg === 100) done++;
-                    return done * 1000 + wAvg + eAvg;
+                    var sum = 0;
+                    fic.chapters.forEach(function(ch) { sum += (ch[1] + ch[2]) / 2; });
+                    return Math.round(sum / fic.chapters.length);
                 }
-
-                const w = fic.writing || 0;
-                const e = fic.editing || 0;
-                const a = fic.aesthetics || 0;
-                let complete = 0;
-                if (w === 100) complete++;
-                if (e === 100) complete++;
-                if (a === 100) complete++;
-                return complete * 1000 + w + e + a;
+                return Math.round(((fic.writing || 0) + (fic.editing || 0) + (fic.aesthetics || 0)) / 3);
             }
 
-            function progressItem(label, cls, value) {
+            function nextChapterPct(fic) {
+                // for chapter fics: progress of the chapter closest to posting
+                if (!fic.chapters) return overallPct(fic);
+                for (var i = 0; i < fic.chapters.length; i++) {
+                    var ch = fic.chapters[i];
+                    if (ch[1] < 100 || ch[2] < 100) return Math.round((ch[1] + ch[2]) / 2);
+                }
+                return 100;
+            }
+
+            function status(fic) {
+                if (fic.backlog) return { key: 'resting', label: 'resting 🌙', group: 'resting' };
+                if (fic.chapters) {
+                    var p = nextChapterPct(fic);
+                    if (p === 100) return { key: 'ready', label: 'ready to post ✉', group: 'close' };
+                    if (p >= 50)  return { key: 'editing', label: 'editing ✂', group: 'close' };
+                    return { key: 'drafting', label: 'drafting ✎', group: 'working' };
+                }
+                var w = fic.writing || 0, e = fic.editing || 0, a = fic.aesthetics || 0;
+                if (w === 100 && e === 100 && a === 100) return { key: 'ready', label: 'ready to post ✉', group: 'close' };
+                if (w === 100 && e === 100) return { key: 'polishing', label: 'polishing ✦', group: 'close' };
+                if (w === 100) return { key: 'editing', label: 'editing ✂', group: 'working' };
+                return { key: 'drafting', label: 'drafting ✎', group: 'working' };
+            }
+
+            function score(fic) {
+                if (fic.backlog) return -1;
+                return overallPct(fic);
+            }
+
+            /* ----- building blocks ----- */
+
+            function tropeChips(meta) {
+                return '<div class="trope-row">' + meta.split('•').map(function(t) {
+                    return '<span class="trope">' + t.trim() + '</span>';
+                }).join('') + '</div>';
+            }
+
+            function barItem(label, cls, value) {
                 return '<div class="progress-item">' +
                     '<div class="progress-label"><span>' + label + '</span><span>' + value + '%</span></div>' +
-                    '<div class="progress-bar"><div class="progress-fill ' + cls + '" style="width: 0%" data-target="' + value + '"></div></div>' +
+                    '<div class="progress-bar"><div class="progress-fill ' + cls + '" data-target="' + value + '"></div></div>' +
                 '</div>';
             }
 
-            function buildCard(fic) {
-                const card = document.createElement('div');
-                card.className = 'fic-card';
-
-                if (fic.backlog) {
-                    card.innerHTML = '<h2 class="fic-title">' + fic.title + '</h2>' +
-                        '<p class="fic-meta">' + fic.meta + '</p>' +
-                        '<div class="backlog-large">backlogging chapters</div>';
-                    return card;
-                }
-
-                if (fic.chapters) {
-                    var first = fic.chapters[0][0];
-                    var last = fic.chapters[fic.chapters.length - 1][0];
-                    var chips = fic.chapters.map(function(ch) {
-                        var edited = ch[2] === 100;
-                        return '<div class="chapter-chip' + (edited ? ' edited' : '') + '">' +
-                            '<span class="chapter-num">' + ch[0] + (edited ? '<span class="check">✓</span>' : '') + '</span>' +
-                            '<div class="mini-bar"><div class="mini-fill" style="width: 0%" data-target="' + ch[1] + '"></div></div>' +
-                            '<div class="mini-bar"><div class="mini-fill edit" style="width: 0%" data-target="' + ch[2] + '"></div></div>' +
-                        '</div>';
-                    }).join('');
-
-                    card.innerHTML = '<h2 class="fic-title">' + fic.title + '</h2>' +
-                        '<p class="fic-meta">' + fic.meta + '</p>' +
-                        '<span class="next-chapter">chapters ' + first + '–' + last + '</span>' +
-                        '<div class="chapter-grid">' + chips + '</div>' +
-                        '<div class="chapter-legend">top bar = written · bottom bar = edited</div>';
-                    return card;
-                }
-
-                card.innerHTML = '<h2 class="fic-title">' + fic.title + '</h2>' +
-                    '<p class="fic-meta">' + fic.meta + '</p>' +
-                    '<span class="next-chapter">next chapter</span>' +
-                    '<div class="progress-section">' +
-                        progressItem('writing', 'writing', fic.writing || 0) +
-                        progressItem('editing', 'editing', fic.editing || 0) +
-                        progressItem('working on aesthetics', 'aesthetics', fic.aesthetics || 0) +
+            function chapterGrid(fic) {
+                var snips = fic.snippets || {};
+                var anySnips = false;
+                var chips = fic.chapters.map(function(ch) {
+                    var edited = ch[2] === 100;
+                    var hasSnip = snips[ch[0]] && snips[ch[0]].length > 0;
+                    if (hasSnip) anySnips = true;
+                    return '<div class="chapter-chip' + (edited ? ' edited' : '') + (hasSnip ? ' has-snippet' : '') + '"' +
+                        (hasSnip ? ' data-ch="' + ch[0] + '" role="button" tabindex="0" aria-label="read a snippet from chapter ' + ch[0] + '"' : '') + '>' +
+                        '<span class="chapter-num">' + ch[0] + (edited ? '<span class="check">✓</span>' : '') + (hasSnip ? '<span class="snip-mark">❝</span>' : '') + '</span>' +
+                        '<div class="mini-bar"><div class="mini-fill" data-target="' + ch[1] + '"></div></div>' +
+                        '<div class="mini-bar"><div class="mini-fill edit" data-target="' + ch[2] + '"></div></div>' +
                     '</div>';
-                return card;
+                }).join('');
+                var legend = 'top bar = written · bottom bar = edited' + (anySnips ? ' · ❝ = tap for a snippet' : '');
+                return '<div class="chapter-grid">' + chips + '</div>' +
+                    '<div class="chapter-legend">' + legend + '</div>';
             }
 
-            const grid = document.getElementById('ficGrid');
-            const sorted = FICS.slice().sort(function(a, b) {
-                return progressScore(b) - progressScore(a);
-            });
+            function detailContent(fic) {
+                var html = '<hr class="detail-divider">';
+                if (fic.chapters) {
+                    html += chapterGrid(fic);
+                } else if (!fic.backlog) {
+                    html += barItem('writing', 'fill-writing', fic.writing || 0) +
+                            barItem('editing', 'fill-editing', fic.editing || 0) +
+                            barItem('working on aesthetics', 'fill-aesthetics', fic.aesthetics || 0);
+                }
+                if (fic.snippets && !fic.chapters) {
+                    html += '<button class="snippet-btn" type="button">read a random snippet ✧</button>';
+                }
+                if (fic.snippets || fic.chapters) {
+                    html += '<blockquote class="snippet-box" hidden></blockquote>';
+                }
+                if (fic.note) html += '<div class="author-note">' + fic.note + '</div>';
+                if (fic.link) html += '<a class="read-link" href="' + fic.link + '" target="_blank" rel="noopener">read what\u2019s posted →</a>';
+                return html;
+            }
+
+            /* ----- spotlight ----- */
+
+            var sorted = FICS.slice().sort(function(a, b) { return score(b) - score(a); });
+            var top = sorted[0];
+            var topPct = overallPct(top);
+            var topStatus = status(top);
+
+            var R = 54, C = 2 * Math.PI * R;
+            var spotlight = document.getElementById('spotlight');
+            spotlight.innerHTML =
+                '<div class="ring-wrap">' +
+                    '<svg width="128" height="128" viewBox="0 0 128 128" aria-hidden="true">' +
+                        '<circle class="ring-track" cx="64" cy="64" r="' + R + '" fill="none" stroke-width="10"/>' +
+                        '<circle class="ring-fill" cx="64" cy="64" r="' + R + '" fill="none" stroke-width="10" ' +
+                            'stroke-dasharray="' + C + '" stroke-dashoffset="' + C + '"/>' +
+                    '</svg>' +
+                    '<div class="ring-label"><span class="pct">' + topPct + '%</span><span class="pct-sub">of the way</span></div>' +
+                '</div>' +
+                '<div class="spotlight-info">' +
+                    '<div class="spotlight-title">' + top.title + '</div>' +
+                    '<div class="spotlight-status">' + topStatus.label + ' — this one\u2019s closest to your screens</div>' +
+                    tropeChips(top.meta) +
+                '</div>';
+
+            /* ----- shelf ----- */
+
+            var shelf = document.getElementById('shelf');
+
             sorted.forEach(function(fic) {
-                grid.appendChild(buildCard(fic));
+                var st = status(fic);
+                var pct = overallPct(fic);
+                var card = document.createElement('article');
+                card.className = 'fic-card';
+                card.setAttribute('data-group', st.group);
+
+                var summary;
+                if (fic.backlog) {
+                    summary = '<div class="resting-line">quietly collecting chapters in the drafts…</div>';
+                } else {
+                    summary =
+                        '<div class="overall-row">' +
+                            '<div class="overall-bar"><div class="overall-fill" data-target="' + pct + '"></div></div>' +
+                            '<span class="overall-pct">' + pct + '%</span>' +
+                        '</div>';
+                }
+
+                var hasDetail = !fic.backlog || fic.note || fic.link || fic.snippets;
+
+                card.innerHTML =
+                    '<button class="fic-toggle" aria-expanded="false">' +
+                        '<div class="fic-top">' +
+                            '<span class="fic-title">' + fic.title + '</span>' +
+                            '<span class="status-badge status-' + st.key + '">' + st.label + '</span>' +
+                        '</div>' +
+                        tropeChips(fic.meta) +
+                        summary +
+                        (hasDetail ? '<div class="open-hint">tap to open ✧</div>' : '') +
+                    '</button>' +
+                    (hasDetail ?
+                        '<div class="fic-detail"><div class="fic-detail-inner">' + detailContent(fic) + '</div></div>'
+                    : '');
+
+                shelf.appendChild(card);
+
+                var toggle = card.querySelector('.fic-toggle');
+                if (hasDetail) {
+                    toggle.addEventListener('click', function(ev) {
+                        var opening = !card.classList.contains('open');
+                        card.classList.toggle('open');
+                        toggle.setAttribute('aria-expanded', opening ? 'true' : 'false');
+                        card.querySelector('.open-hint').textContent = opening ? 'tap to close ✧' : 'tap to open ✧';
+                        if (opening) {
+                            fillBars(card);
+                            if (st.key === 'ready' || st.key === 'polishing') sparkle(ev.clientX, ev.clientY);
+                        }
+                    });
+                } else {
+                    toggle.style.cursor = 'default';
+                }
+
+                /* snippets */
+                var snipBox = card.querySelector('.snippet-box');
+
+                function escapeText(str) {
+                    return String(str)
+                        .replace(/&/g, '&amp;')
+                        .replace(/</g, '&lt;')
+                        .replace(/>/g, '&gt;')
+                        .replace(/\n/g, '<br>');
+                }
+
+                function showSnippet(list, label) {
+                    if (!list || !list.length || !snipBox) return;
+                    var pick = list[Math.floor(Math.random() * list.length)];
+                    if (list.length > 1 && snipBox.getAttribute('data-last') === pick) {
+                        pick = list[(list.indexOf(pick) + 1) % list.length];
+                    }
+                    snipBox.setAttribute('data-last', pick);
+                    snipBox.hidden = false;
+                    snipBox.innerHTML = '\u201C' + escapeText(pick.trim()) + '\u201D' +
+                        (label ? '<span class="snippet-src">' + label + '</span>' : '');
+                }
+
+                var snipBtn = card.querySelector('.snippet-btn');
+                if (snipBtn) {
+                    snipBtn.addEventListener('click', function() {
+                        showSnippet(fic.snippets);
+                        snipBtn.textContent = 'another one ✧';
+                    });
+                }
+
+                card.querySelectorAll('.chapter-chip.has-snippet').forEach(function(chip) {
+                    function reveal() {
+                        var ch = chip.getAttribute('data-ch');
+                        showSnippet(fic.snippets[ch], 'from chapter ' + ch);
+                    }
+                    chip.addEventListener('click', reveal);
+                    chip.addEventListener('keydown', function(ev) {
+                        if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); reveal(); }
+                    });
+                });
             });
 
-            // let the bars animate in
-            requestAnimationFrame(function() {
-                document.querySelectorAll('.progress-fill, .mini-fill').forEach(function(fill) {
-                    fill.style.width = fill.getAttribute('data-target') + '%';
+            /* ----- filters ----- */
+
+            document.getElementById('filters').addEventListener('click', function(ev) {
+                var chip = ev.target.closest('.filter-chip');
+                if (!chip) return;
+                document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+                chip.classList.add('active');
+                var filter = chip.getAttribute('data-filter');
+                document.querySelectorAll('.fic-card').forEach(function(card) {
+                    var show = filter === 'all' || card.getAttribute('data-group') === filter;
+                    card.classList.toggle('hidden', !show);
                 });
+            });
+
+            /* ----- animations ----- */
+
+            function fillBars(scope) {
+                scope.querySelectorAll('[data-target]').forEach(function(el) {
+                    el.style.width = el.getAttribute('data-target') + '%';
+                });
+            }
+
+            function sparkle(x, y) {
+                if (reducedMotion) return;
+                for (var i = 0; i < 6; i++) {
+                    var s = document.createElement('span');
+                    s.className = 'sparkle';
+                    s.textContent = '✦';
+                    s.style.left = (x + (Math.random() * 60 - 30)) + 'px';
+                    s.style.top = (y + (Math.random() * 20 - 10)) + 'px';
+                    s.style.animationDelay = (Math.random() * 0.2) + 's';
+                    document.body.appendChild(s);
+                    setTimeout(function(el) { return function() { el.remove(); }; }(s), 1400);
+                }
+            }
+
+            // animate the visible bars + ring on load
+            requestAnimationFrame(function() {
+                document.querySelectorAll('.overall-fill').forEach(function(el) {
+                    el.style.width = el.getAttribute('data-target') + '%';
+                });
+                var ring = document.querySelector('.ring-fill');
+                ring.style.strokeDashoffset = C * (1 - topPct / 100);
             });
         });
     </script>
