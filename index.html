@@ -8,20 +8,26 @@
     <script>
     // update the date + the numbers below, everything else updates itself
     // optional per fic: note: "..." (shows when card is opened), link: "https://..." (adds a read button)
-    // snippets — paste the ones you've already posted publicly:
-    //   wrap each snippet in backticks ` like this ` — line breaks, quotes and <channel dialogue> all work.
-    //   regular fics:  snippets: [`first snippet`, `second snippet`]
-    //     → adds a "read a random snippet ✧" button inside the card (see the 25th hour for a live example)
-    //   chapter fics:  snippets: { 24: [`snippet from ch 24`], 19: [`one`, `another`] }
-    //     → those chapter chips get a ❝ mark and become tappable, showing a random snippet from that chapter
+    // snippets — every active fic has 10 ready-made slots (asw has 2 per chapter):
+    //   replace the word TEXT with a snippet you've posted publicly and it goes live. that's it.
+    //   slots still saying TEXT are invisible — no button appears until at least one slot has a real snippet.
+    //   keep each snippet between its backticks ` ` — line breaks, quotes and <channel dialogue> all work.
+    //   need more slots? copy a whole `TEXT`, line (backticks and comma included) and paste it below.
     const LAST_UPDATED = "July 16th, 2026";
 
     const FICS = [
       { title: "fuck me up ♪", meta: "fuck buddies • slow burn • roommates to lovers • psych. depth", writing: 100, editing: 0, aesthetics: 0,
-       snippets: [
+        snippets: [
 `Jungkook has not punched Jason Calloway in the face for five consecutive days and he thinks, honestly, that deserves some kind of international recognition.`,
-
-`Yeah, he missed this.`
+`Yeah, he missed this.`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
         ] },
       { title: "geumji ✎", meta: "gang au • violence • enemies to lovers • slow burn • fuck buddies", backlog: true, note: "book 2 of the kkangpae gyori trilogy" },
       { title: "unmanageable ✎", meta: "entertainment industry • pure hatred to love • manager x actor", backlog: true },
@@ -72,18 +78,90 @@ Jimin turns his head to look at you for the first time since he lay down.
 
 He looks at the ceiling again.
 
-“So I stay mad,” he concludes. “Because I've got to do something with it. And mad at least keeps me awake.”`
+“So I stay mad,” he concludes. “Because I've got to do something with it. And mad at least keeps me awake.”`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
         ] },
-      { title: "we grew up somewhere along the way ♪", meta: "osaka 2003 • childhood friends to lovers • grumpy x sunshine", writing: 100, editing: 100, aesthetics: 20 },
-      { title: "code : epitaph ♪", meta: "dystopian • blood bonds • 60 days survival • e2l—pure hatred", writing: 75, editing: 0, aesthetics: 0 },
-      { title: "5 seconds to freedom ♪", meta: "street racing • tokyo • heiress x racer • rivals to lovers • latino!jimin", writing: 100, editing: 0, aesthetics: 0 },
-      { title: "out of line ♪", meta: "football • real madrid • arrogant!tae • slowburn", writing: 50, editing: 0, aesthetics: 0 },
+      { title: "we grew up somewhere along the way ♪", meta: "osaka 2003 • childhood friends to lovers • grumpy x sunshine", writing: 100, editing: 100, aesthetics: 20,
+        snippets: [
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+        ] },
+      { title: "code : epitaph ♪", meta: "dystopian • blood bonds • 60 days survival • e2l—pure hatred", writing: 75, editing: 0, aesthetics: 0,
+        snippets: [
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+        ] },
+      { title: "5 seconds to freedom ♪", meta: "street racing • tokyo • heiress x racer • rivals to lovers • latino!jimin", writing: 100, editing: 0, aesthetics: 0,
+        snippets: [
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+        ] },
+      { title: "out of line ♪", meta: "football • real madrid • arrogant!tae • slowburn", writing: 50, editing: 0, aesthetics: 0,
+        snippets: [
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+        ] },
       // asw: [chapter, written%, edited%]
       { title: "altars in shallow waters ♪", meta: "stalker!tae • ballerina!reader • paris • psychological • dark romance",
         chapters: [
           [18, 100, 100], [19, 100, 0], [20, 100, 0], [21, 100, 0], [22, 100, 0], [23, 100, 0],
           [24, 30, 0], [25, 0, 0], [26, 0, 0], [27, 0, 0], [28, 0, 0], [29, 0, 0], [30, 0, 0], [31, 0, 0], [32, 0, 0]
-        ] },
+        ],
+        snippets: {
+          18: [`TEXT`, `TEXT`],
+          19: [`TEXT`, `TEXT`],
+          20: [`TEXT`, `TEXT`],
+          21: [`TEXT`, `TEXT`],
+          22: [`TEXT`, `TEXT`],
+          23: [`TEXT`, `TEXT`],
+          24: [`TEXT`, `TEXT`],
+          25: [`TEXT`, `TEXT`],
+          26: [`TEXT`, `TEXT`],
+          27: [`TEXT`, `TEXT`],
+          28: [`TEXT`, `TEXT`],
+          29: [`TEXT`, `TEXT`],
+          30: [`TEXT`, `TEXT`],
+          31: [`TEXT`, `TEXT`],
+          32: [`TEXT`, `TEXT`],
+        } },
       { title: "in the presence of you ✎", meta: "royalty • 1700s/1800s • arranged marriage • slow burn", backlog: true },
     ];
 
@@ -737,6 +815,28 @@ He looks at the ceiling again.
             document.getElementById('kofiLink').href = KOFI_URL;
 
             var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            /* ----- ignore untouched TEXT placeholder snippet slots ----- */
+
+            function isRealSnippet(s) {
+                s = String(s).trim();
+                return s.length > 0 && s.toUpperCase() !== 'TEXT';
+            }
+
+            FICS.forEach(function(fic) {
+                if (!fic.snippets) return;
+                if (Array.isArray(fic.snippets)) {
+                    fic.snippets = fic.snippets.filter(isRealSnippet);
+                    if (!fic.snippets.length) delete fic.snippets;
+                } else {
+                    var any = false;
+                    Object.keys(fic.snippets).forEach(function(ch) {
+                        fic.snippets[ch] = (fic.snippets[ch] || []).filter(isRealSnippet);
+                        if (fic.snippets[ch].length) { any = true; } else { delete fic.snippets[ch]; }
+                    });
+                    if (!any) delete fic.snippets;
+                }
+            });
 
             /* ----- derived numbers ----- */
 
