@@ -58,10 +58,12 @@
          slots left as TEXT don't exist as far as the page is concerned.
        - stay inside the backticks. line breaks, quotes, your <channel>
          brackets — all fine in there. just leave the commas alone.
+       - _word_ or *word* shows as emphasis, **word** as bold. html tags
+         like <i> won't work (on purpose, so your <brackets> display).
        - the number is the chapter the snippets are for. only your
          newest chapter shows, so when you post ch 35 and start 36,
          add a  36: [ `TEXT`, ... ],  block above and move on. nothing
-         needs deleting, ever. 
+         needs deleting, ever.
        - asw ignores the "newest only" rule since it shows chips per
          chapter. drop a chapter from PROGRESS and its snippets stop
          showing on their own.
@@ -202,7 +204,8 @@ He looks at the ceiling again.
       },
 
       "asw": {
-        18: [`"What colour do you like?" you ask.
+        18: [
+`"What colour do you like?" you ask.
 
 His head jerks toward you. Away. Back. The fringe falls forward.
 
@@ -220,14 +223,15 @@ He exhales like you've wounded him.
 
 His voice comes out barely above a murmur, and his fringe is fully covering his eyes now, chin angled down.
 
-"Blue. You—y-you'd be… pretty. _Blue_."`, `
-"Of course," you say, "if you're going to do it anyway, I'd rather _supervise."_
+"Blue. You—y-you'd be… pretty. _Blue_."`,
+
+`"Of course," you say, "if you're going to do it anyway, I'd rather _supervise."_
 
 His head jerks up.
 
 "Supervise—"
 
-"If you say chocolatine," you say, "I'll give you my number. And tonight, when you fail not to think about me, I’ll call. And I'll tell you what to do with your hands."
+"If you say chocolatine," you say, "I'll give you my number. And tonight, when you fail not to think about me, I'll call. And I'll tell you what to do with your hands."
 
 He stares at you.
 
@@ -239,25 +243,29 @@ If he had a tail it would be definitely wagging.
 
 "Really?" he says.
 
-It comes out so small. So _earnest_. The hopeful, cracked version of the word, like he's asking you to confirm that gravity has been suspended just for him.
+It comes out so small. So _earnest_. The hopeful, cracked version of the word, like he's asking you to confirm that gravity has been suspended just for him.
 
 You smirk.
 
-"So you are a pervert after all."`],
-        19: [`TEXT`, `TEXT`],
-        20: [`TEXT`, `TEXT`],
-        21: [`TEXT`, `TEXT`],
-        22: [`TEXT`, `TEXT`],
-        23: [`TEXT`, `TEXT`],
-        24: [`TEXT`, `TEXT`],
-        25: [`TEXT`, `TEXT`],
-        26: [`TEXT`, `TEXT`],
-        27: [`TEXT`, `TEXT`],
-        28: [`TEXT`, `TEXT`],
-        29: [`TEXT`, `TEXT`],
-        30: [`TEXT`, `TEXT`],
-        31: [`TEXT`, `TEXT`],
-        32: [`TEXT`, `TEXT`],
+"So you are a pervert after all."`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+        ],
+        19: [`TEXT`, `TEXT`, `TEXT`, `TEXT`, `TEXT`],
+        20: [`TEXT`, `TEXT`, `TEXT`, `TEXT`, `TEXT`],
+        21: [`TEXT`, `TEXT`, `TEXT`, `TEXT`, `TEXT`],
+        22: [`TEXT`, `TEXT`, `TEXT`, `TEXT`, `TEXT`],
+        23: [`TEXT`, `TEXT`, `TEXT`, `TEXT`, `TEXT`],
+        24: [`TEXT`, `TEXT`, `TEXT`, `TEXT`, `TEXT`],
+        25: [`TEXT`, `TEXT`, `TEXT`, `TEXT`, `TEXT`],
+        26: [`TEXT`, `TEXT`, `TEXT`, `TEXT`, `TEXT`],
+        27: [`TEXT`, `TEXT`, `TEXT`, `TEXT`, `TEXT`],
+        28: [`TEXT`, `TEXT`, `TEXT`, `TEXT`, `TEXT`],
+        29: [`TEXT`, `TEXT`, `TEXT`, `TEXT`, `TEXT`],
+        30: [`TEXT`, `TEXT`, `TEXT`, `TEXT`, `TEXT`],
+        31: [`TEXT`, `TEXT`, `TEXT`, `TEXT`, `TEXT`],
+        32: [`TEXT`, `TEXT`, `TEXT`, `TEXT`, `TEXT`],
       },
 
     };
@@ -748,6 +756,10 @@ You smirk.
             margin-top: 0.8rem;
         }
 
+        /* the box is already italic, so emphasised words flip upright to stand out */
+        .snippet-box em { font-style: normal; }
+        .snippet-box strong { font-weight: 600; }
+
         .snippet-src {
             display: block;
             font-family: 'Karla', sans-serif;
@@ -1134,6 +1146,14 @@ You smirk.
                         .replace(/\n/g, '<br>');
                 }
 
+                // tumblr-style markdown: _word_ or *word* for italics, **word** for bold
+                function markdown(str) {
+                    return str
+                        .replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>')
+                        .replace(/\*([^*\n]+)\*/g, '<em>$1</em>')
+                        .replace(/_([^_\n]+)_/g, '<em>$1</em>');
+                }
+
                 function showSnippet(list, label) {
                     if (!list || !list.length || !snipBox) return;
                     var pick = list[Math.floor(Math.random() * list.length)];
@@ -1142,7 +1162,7 @@ You smirk.
                     }
                     snipBox.setAttribute('data-last', pick);
                     snipBox.hidden = false;
-                    snipBox.innerHTML = '\u201C' + escapeText(pick.trim()) + '\u201D' +
+                    snipBox.innerHTML = '\u201C' + markdown(escapeText(pick.trim())) + '\u201D' +
                         (label ? '<span class="snippet-src">' + label + '</span>' : '');
                 }
 
