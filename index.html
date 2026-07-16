@@ -6,18 +6,71 @@
     <title>jungkoode's writing desk</title>
 
     <script>
-    // update the date + the numbers below, everything else updates itself
-    // optional per fic: note: "..." (shows when card is opened), link: "https://..." (adds a read button)
-    // snippets — every active fic has 10 ready-made slots (asw has 2 per chapter):
-    //   replace the word TEXT with a snippet you've posted publicly and it goes live. that's it.
-    //   slots still saying TEXT are invisible — no button appears until at least one slot has a real snippet.
-    //   keep each snippet between its backticks ` ` — line breaks, quotes and <channel dialogue> all work.
-    //   need more slots? copy a whole `TEXT`, line (backticks and comma included) and paste it below.
+    /* ------------------------------------------------------------------
+       your zone. the only stuff you need to touch is right here:
+       change the date, change the numbers, commit. please DON'T touch anything else.
+       ------------------------------------------------------------------ */
+
     const LAST_UPDATED = "July 16th, 2026";
 
+    const PROGRESS = {
+      "fmu":     { writing: 100, editing: 0,   aesthetics: 0 },
+      "25h":     { writing: 100, editing: 100, aesthetics: 50 },
+      "wgu":     { writing: 100, editing: 100, aesthetics: 20 },
+      "epitaph": { writing: 75,  editing: 0,   aesthetics: 0 },
+      "5stf":    { writing: 100, editing: 0,   aesthetics: 0 },
+      "ofl":     { writing: 50,  editing: 0,   aesthetics: 0 },
+
+      // asw works per chapter: [chapter, written%, edited%]
+      // posted one? delete its line and forget about it, the page sorts itself out
+      "asw": { chapters: [
+        [18, 100, 100], [19, 100, 0], [20, 100, 0], [21, 100, 0], [22, 100, 0], [23, 100, 0],
+        [24, 30, 0], [25, 0, 0], [26, 0, 0], [27, 0, 0], [28, 0, 0], [29, 0, 0], [30, 0, 0], [31, 0, 0], [32, 0, 0]
+      ] },
+    };
+
+    /* ------------------------------------------------------------------
+       fic list. titles, tags, the odd note. you'll edit this like
+       twice a year. backlogged fics only need an entry here.
+       ------------------------------------------------------------------ */
+
     const FICS = [
-      { title: "fuck me up ♪", meta: "fuck buddies • slow burn • roommates to lovers • psych. depth", writing: 100, editing: 0, aesthetics: 0,
-        snippets: [
+      { id: "fmu",     title: "fuck me up ♪", meta: "fuck buddies • slow burn • roommates to lovers • psych. depth" },
+      { id: "geumji",  title: "geumji ✎", meta: "gang au • violence • enemies to lovers • slow burn • fuck buddies", backlog: true, note: "book 2 of the kkangpae gyori trilogy" },
+      { id: "unmng",   title: "unmanageable ✎", meta: "entertainment industry • pure hatred to love • manager x actor", backlog: true },
+      { id: "margins", title: "margins ✎", meta: "publishing industry • cat vs. dog • workplace romance • romcom", backlog: true },
+      { id: "25h",     title: "the 25th hour ♪", meta: "dystopian • time-bending • psychological • starcrossed+fated lovers" },
+      { id: "wgu",     title: "we grew up somewhere along the way ♪", meta: "osaka 2003 • childhood friends to lovers • grumpy x sunshine" },
+      { id: "epitaph", title: "code : epitaph ♪", meta: "dystopian • blood bonds • 60 days survival • e2l—pure hatred" },
+      { id: "5stf",    title: "5 seconds to freedom ♪", meta: "street racing • tokyo • heiress x racer • rivals to lovers • latino!jimin" },
+      { id: "ofl",     title: "out of line ♪", meta: "football • real madrid • arrogant!tae • slowburn" },
+      { id: "asw",     title: "altars in shallow waters ♪", meta: "stalker!tae • ballerina!reader • paris • psychological • dark romance" },
+      { id: "presence", title: "in the presence of you ✎", meta: "royalty • 1700s/1800s • arranged marriage • slow burn", backlog: true },
+    ];
+
+    const KOFI_URL = "https://ko-fi.com/jungkoode";
+
+    /* ------------------------------------------------------------------
+       snippets. yes it's long, that's why it's at the bottom.
+
+       the short version:
+       - swap a TEXT for one of your posted snippets and it goes live.
+         slots left as TEXT don't exist as far as the page is concerned.
+       - stay inside the backticks. line breaks, quotes, your <channel>
+         brackets — all fine in there. just leave the commas alone.
+       - the number is the chapter the snippets are for. only your
+         newest chapter shows, so when you post ch 35 and start 36,
+         add a  36: [ `TEXT`, ... ],  block above and move on. nothing
+         needs deleting, ever. 
+       - asw ignores the "newest only" rule since it shows chips per
+         chapter. drop a chapter from PROGRESS and its snippets stop
+         showing on their own.
+       ------------------------------------------------------------------ */
+
+    const SNIPPETS = {
+
+      "fmu": {
+        35: [
 `Jungkook has not punched Jason Calloway in the face for five consecutive days and he thinks, honestly, that deserves some kind of international recognition.`,
 `Yeah, he missed this.`,
 `TEXT`,
@@ -28,12 +81,11 @@
 `TEXT`,
 `TEXT`,
 `TEXT`,
-        ] },
-      { title: "geumji ✎", meta: "gang au • violence • enemies to lovers • slow burn • fuck buddies", backlog: true, note: "book 2 of the kkangpae gyori trilogy" },
-      { title: "unmanageable ✎", meta: "entertainment industry • pure hatred to love • manager x actor", backlog: true },
-      { title: "margins ✎", meta: "publishing industry • cat vs. dog • workplace romance • romcom", backlog: true },
-      { title: "the 25th hour ♪", meta: "dystopian • time-bending • psychological • starcrossed+fated lovers", writing: 100, editing: 100, aesthetics: 50,
-        snippets: [
+        ],
+      },
+
+      "25h": {
+        16: [
 `<He's like fifteen,> he says over the channel. <Maybe sixteen.>
 
 <I know,> Taehyung replies.
@@ -86,86 +138,88 @@ He looks at the ceiling again.
 `TEXT`,
 `TEXT`,
 `TEXT`,
-        ] },
-      { title: "we grew up somewhere along the way ♪", meta: "osaka 2003 • childhood friends to lovers • grumpy x sunshine", writing: 100, editing: 100, aesthetics: 20,
-        snippets: [
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-        ] },
-      { title: "code : epitaph ♪", meta: "dystopian • blood bonds • 60 days survival • e2l—pure hatred", writing: 75, editing: 0, aesthetics: 0,
-        snippets: [
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-        ] },
-      { title: "5 seconds to freedom ♪", meta: "street racing • tokyo • heiress x racer • rivals to lovers • latino!jimin", writing: 100, editing: 0, aesthetics: 0,
-        snippets: [
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-        ] },
-      { title: "out of line ♪", meta: "football • real madrid • arrogant!tae • slowburn", writing: 50, editing: 0, aesthetics: 0,
-        snippets: [
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-`TEXT`,
-        ] },
-      // asw: [chapter, written%, edited%]
-      { title: "altars in shallow waters ♪", meta: "stalker!tae • ballerina!reader • paris • psychological • dark romance",
-        chapters: [
-          [18, 100, 100], [19, 100, 0], [20, 100, 0], [21, 100, 0], [22, 100, 0], [23, 100, 0],
-          [24, 30, 0], [25, 0, 0], [26, 0, 0], [27, 0, 0], [28, 0, 0], [29, 0, 0], [30, 0, 0], [31, 0, 0], [32, 0, 0]
         ],
-        snippets: {
-          18: [`TEXT`, `TEXT`],
-          19: [`TEXT`, `TEXT`],
-          20: [`TEXT`, `TEXT`],
-          21: [`TEXT`, `TEXT`],
-          22: [`TEXT`, `TEXT`],
-          23: [`TEXT`, `TEXT`],
-          24: [`TEXT`, `TEXT`],
-          25: [`TEXT`, `TEXT`],
-          26: [`TEXT`, `TEXT`],
-          27: [`TEXT`, `TEXT`],
-          28: [`TEXT`, `TEXT`],
-          29: [`TEXT`, `TEXT`],
-          30: [`TEXT`, `TEXT`],
-          31: [`TEXT`, `TEXT`],
-          32: [`TEXT`, `TEXT`],
-        } },
-      { title: "in the presence of you ✎", meta: "royalty • 1700s/1800s • arranged marriage • slow burn", backlog: true },
-    ];
+      },
 
-    const KOFI_URL = "https://ko-fi.com/jungkoode";
+      "wgu": {
+        9: [
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+        ],
+      },
+
+      "epitaph": {
+        7: [
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+        ],
+      },
+
+      "5stf": {
+        11: [
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+        ],
+      },
+
+      "ofl": {
+        9: [
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+`TEXT`,
+        ],
+      },
+
+      "asw": {
+        18: [`TEXT`, `TEXT`],
+        19: [`TEXT`, `TEXT`],
+        20: [`TEXT`, `TEXT`],
+        21: [`TEXT`, `TEXT`],
+        22: [`TEXT`, `TEXT`],
+        23: [`TEXT`, `TEXT`],
+        24: [`TEXT`, `TEXT`],
+        25: [`TEXT`, `TEXT`],
+        26: [`TEXT`, `TEXT`],
+        27: [`TEXT`, `TEXT`],
+        28: [`TEXT`, `TEXT`],
+        29: [`TEXT`, `TEXT`],
+        30: [`TEXT`, `TEXT`],
+        31: [`TEXT`, `TEXT`],
+        32: [`TEXT`, `TEXT`],
+      },
+
+    };
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -798,7 +852,7 @@ He looks at the ceiling again.
         <footer class="footer">✦ ✦ ✦</footer>
     </div>
 
-    <!-- gradient definition for the spotlight ring -->
+    <!-- svg gradient for the progress ring -->
     <svg width="0" height="0" aria-hidden="true">
         <defs>
             <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -816,7 +870,15 @@ He looks at the ceiling again.
 
             var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-            /* ----- ignore untouched TEXT placeholder snippet slots ----- */
+            // glue the three config blocks together so each fic knows its own numbers/snippets
+
+            FICS.forEach(function(fic) {
+                var p = PROGRESS[fic.id];
+                if (p) { for (var k in p) { fic[k] = p[k]; } }
+                if (SNIPPETS[fic.id]) { fic.snippets = SNIPPETS[fic.id]; }
+            });
+
+            // throw away any snippet slot still sitting at TEXT
 
             function isRealSnippet(s) {
                 s = String(s).trim();
@@ -828,17 +890,23 @@ He looks at the ceiling again.
                 if (Array.isArray(fic.snippets)) {
                     fic.snippets = fic.snippets.filter(isRealSnippet);
                     if (!fic.snippets.length) delete fic.snippets;
-                } else {
-                    var any = false;
-                    Object.keys(fic.snippets).forEach(function(ch) {
-                        fic.snippets[ch] = (fic.snippets[ch] || []).filter(isRealSnippet);
-                        if (fic.snippets[ch].length) { any = true; } else { delete fic.snippets[ch]; }
-                    });
-                    if (!any) delete fic.snippets;
+                    return;
+                }
+                var any = false;
+                Object.keys(fic.snippets).forEach(function(ch) {
+                    fic.snippets[ch] = (fic.snippets[ch] || []).filter(isRealSnippet);
+                    if (fic.snippets[ch].length) { any = true; } else { delete fic.snippets[ch]; }
+                });
+                if (!any) { delete fic.snippets; return; }
+
+                // non-asw fics: newest chapter wins, older snippet blocks just sit there unused
+                if (!fic.chapters) {
+                    var newest = Object.keys(fic.snippets).map(Number).sort(function(a, b) { return b - a; })[0];
+                    fic.snippets = fic.snippets[newest];
                 }
             });
 
-            /* ----- derived numbers ----- */
+            // ---- numbers derived from the config ----
 
             function overallPct(fic) {
                 if (fic.backlog) return 0;
@@ -851,7 +919,7 @@ He looks at the ceiling again.
             }
 
             function nextChapterPct(fic) {
-                // for chapter fics: progress of the chapter closest to posting
+                // asw-style fics: how far along is the next unposted chapter
                 if (!fic.chapters) return overallPct(fic);
                 for (var i = 0; i < fic.chapters.length; i++) {
                     var ch = fic.chapters[i];
@@ -880,7 +948,7 @@ He looks at the ceiling again.
                 return overallPct(fic);
             }
 
-            /* ----- building blocks ----- */
+            // ---- html builders ----
 
             function tropeChips(meta) {
                 return '<div class="trope-row">' + meta.split('•').map(function(t) {
@@ -934,7 +1002,7 @@ He looks at the ceiling again.
                 return html;
             }
 
-            /* ----- spotlight ----- */
+            // ---- the "up next" card ----
 
             var sorted = FICS.slice().sort(function(a, b) { return score(b) - score(a); });
             var top = sorted[0];
@@ -958,7 +1026,7 @@ He looks at the ceiling again.
                     tropeChips(top.meta) +
                 '</div>';
 
-            /* ----- shelf ----- */
+            // ---- fic cards ----
 
             var shelf = document.getElementById('shelf');
 
@@ -1014,7 +1082,7 @@ He looks at the ceiling again.
                     toggle.style.cursor = 'default';
                 }
 
-                /* snippets */
+                // snippet plumbing
                 var snipBox = card.querySelector('.snippet-box');
 
                 function escapeText(str) {
@@ -1057,7 +1125,7 @@ He looks at the ceiling again.
                 });
             });
 
-            /* ----- filters ----- */
+            // ---- filter chips ----
 
             document.getElementById('filters').addEventListener('click', function(ev) {
                 var chip = ev.target.closest('.filter-chip');
@@ -1071,7 +1139,7 @@ He looks at the ceiling again.
                 });
             });
 
-            /* ----- animations ----- */
+            // ---- bar/ring animations ----
 
             function fillBars(scope) {
                 scope.querySelectorAll('[data-target]').forEach(function(el) {
@@ -1093,7 +1161,7 @@ He looks at the ceiling again.
                 }
             }
 
-            // animate the visible bars + ring on load
+            // kick the bars + ring once everything's on the page
             requestAnimationFrame(function() {
                 document.querySelectorAll('.overall-fill').forEach(function(el) {
                     el.style.width = el.getAttribute('data-target') + '%';
